@@ -1,0 +1,3 @@
+Extra requirements:
+- ngrok
+- poetry
