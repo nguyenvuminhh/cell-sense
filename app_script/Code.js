@@ -46,8 +46,8 @@ function getRangePayload(rangeLabel) {
   }
 
   try {
-    const values = sheet.getRange(rangeNotation).getValues();
-    return { range: rangeLabel, values };
+    const cell_values = sheet.getRange(rangeNotation).getValues();
+    return { sheet_name_and_range: rangeLabel, cell_values };
   } catch (error) {
     Logger.log(`Failed to read range ${rangeLabel}: ${error}`);
     return null;
@@ -56,7 +56,7 @@ function getRangePayload(rangeLabel) {
 
 
 function extractRangesFromMessage(message) {
-  const pattern = /<cell-range>(.*?)<cell-range\/>/g;
+  const pattern = /<cells>(.*?)<cells\/>/g;
   const ranges = [];
   const seen = new Set();
   let match;
@@ -77,17 +77,16 @@ function extractRangesFromMessage(message) {
 }
 
 
-function handleMessage(message) {
+function handleMessage(message, targetCells) {
   const apiUrl = CONFIG.API_URL;
-  const sheet = SpreadsheetApp.getActiveSheet();
-  const sheetData = sheet.getDataRange().getValues();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  // const sheetData = sheet.getDataRange().getValues();
   const selectedRanges = extractRangesFromMessage(message);
 
   const payload = {
     message,
-    sheet: sheetData,
-    sheet_name: sheet.getName(),
     selected_ranges: selectedRanges,
+    target_range: {"sheet_name_and_range": targetCells},
   };
 
   const response = callApi('POST', apiUrl + '/chat', payload);
@@ -95,8 +94,22 @@ function handleMessage(message) {
   if (response.error) {
     return { reply: `Something went wrong: ${response.error}` };
   }
+  try {
+    if (response.filled_ranges && response.filled_ranges.length > 0) {
+      response.filled_ranges.forEach(filled => {
+        const targetSheet = ss.getSheetByName(filled.sheet_name);
+        if (!targetSheet) {
+          throw new Error(`Sheet not found: ${filled.sheet_name}`);
+        }
 
-  sheet.getRange(1, 1).setValue('it worked');
+        const range = targetSheet.getRange(filled.range);
+        range.setFormulaR1C1(filled.r1c1_value);
+      });
+    }
+  } catch (err) {
+    Logger.log("Error filling cells: " + err);
+    return { reply: "Error while filling cells: " + err.message };
+  }
 
-  return { reply: response.reply || 'No reply from server.' };
+  return { reply: response.message || 'No reply from server.' };
 }

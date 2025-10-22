@@ -30,7 +30,7 @@ run_prod:
 .PHONY: ngrok_expose
 ngrok_expose:
 	ngrok http 8000
-	
+
 # ----------- GCLOUD -----------
 .PHONY: setup_gcloud
 setup_gcloud:
@@ -62,7 +62,7 @@ gcloud_deploy_to_app_script:
 # ----------- PRE-COMMIT -----------
 .PHONY: precommit
 precommit:
-	poetry run pre-commit run --all-files
+	pre-commit run --all-files
 
 .PHONY: test
 test:

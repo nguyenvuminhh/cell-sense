@@ -66,6 +66,15 @@
         align-items: center;
       }
 
+      /* Target cell label */
+      #target-label {
+        width: 100%;
+        font-size: 0.85rem;
+        color: #9ca3af;
+        margin-bottom: 6px;
+        text-align: left;
+      }
+
       /* Chat input area (textarea + buttons all in one column) */
       #chat-input-group {
         display: flex;
@@ -118,12 +127,13 @@
       #select-btn {
         background: #1f2937;
       }
+      #set-btn {
+        background: #059669;
+      }
       #send-btn {
         background: #1d4ed8;
       }
 
-
-      
     </style>
   </head>
   <body>
@@ -132,10 +142,14 @@
 
       <!-- ✅ unified input section -->
       <div id="input-area">
+        <div id="target-label">Target cell(s): <span id="target-value">-</span></div>
         <div id="chat-input-group">
           <textarea id="user-input" placeholder="Ask something..." aria-label="Message input" style="text-align: left;"></textarea>
           <div class="btn-row">
             <button id="select-btn" class="btn" onclick="fillSelectedRange()">Select</button>
+            <button id="set-btn" class="btn" onclick="setTargetCell()">Set</button>
+          </div>
+          <div class="btn-row">
             <button id="send-btn" class="btn" onclick="sendMessage()">Send</button>
           </div>
         </div>
@@ -143,6 +157,9 @@
     </div>
 
     <script>
+      // state: target cell
+      let targetCells = null;
+
       function appendMessage(text, sender) {
         const div = document.createElement('div');
         div.className = `chat-box ${sender}`;
@@ -179,7 +196,7 @@
 
             const sheetName = selection.sheetName;
             const range = selection.activeRange;
-            const rangeTag = `<cell-range>'${sheetName}'!${range}<cell-range/>`;
+            const rangeTag = `<cells>'${sheetName}'!${range}<cells/>`;
             appendToInput(rangeTag);
             appendMessage('Selected range: ' + range, 'bot');
           })
@@ -190,10 +207,41 @@
           .getActiveRangeA1Notation();
       }
 
+      function setTargetCell() {
+        const setBtn = document.getElementById('set-btn');
+        setBtn.disabled = true;
+
+        google.script.run
+          .withSuccessHandler(function (selection) {
+            setBtn.disabled = false;
+            if (!selection) {
+              appendMessage('No range selected in the spreadsheet.', 'bot');
+              return;
+            }
+
+            const sheetName = selection.sheetName;
+            const range = selection.activeRange;
+            targetCells = `'${sheetName}'!${range}`;
+            document.getElementById('target-value').textContent = targetCells;
+            appendMessage('Target cell set to: ' + range, 'bot');
+          })
+          .withFailureHandler(function (error) {
+            setBtn.disabled = false;
+            appendMessage(`Error: ${error.message || error}`, 'bot');
+          })
+          .getActiveRangeA1Notation();
+      }
+
       function sendMessage() {
         const sendBtn = document.getElementById('send-btn');
         const message = input.value.trim();
         if (!message) return;
+
+        // Check if target cells is set
+        if (!targetCells) {
+          appendMessage('Please set a target cell first using the Set button.', 'bot');
+          return;
+        }
 
         appendMessage(message, 'user');
         input.value = '';
@@ -202,11 +250,14 @@
         google.script.run
           .withSuccessHandler(function (response) {
             appendMessage(response.reply, 'bot');
+            // Reset target cells after successful send
+            targetCells = null;
+            document.getElementById('target-value').textContent = '-';
           })
           .withFailureHandler(function (error) {
             appendMessage(`Error: ${error.message || error}`, 'bot');
           })
-          .handleMessage(message, []);
+          .handleMessage(message, targetCells);
       }
     </script>
   </body>
