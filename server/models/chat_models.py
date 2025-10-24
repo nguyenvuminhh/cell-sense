@@ -3,7 +3,8 @@ from typing import Any, List
 
 from pydantic import BaseModel, computed_field
 
-from utils.extract_sheet_name_and_range import extract_sheet_name_and_range
+from server.constants import LLMModels, LLMProviders
+from server.utils.extract_sheet_name_and_range import extract_sheet_name_and_range
 
 
 # ----- Request Models -----
@@ -31,6 +32,9 @@ class MessageRequest(BaseModel):
     selected_ranges: List[SelectedRange]
     target_range: Range
 
+    llm_provider: LLMProviders = LLMProviders.GOOGLE
+    llm_model: LLMModels = LLMModels.GOOGLE_GEMINI_2_5_PRO
+
     @computed_field
     @property
     def decoded_message(self) -> str:
@@ -44,4 +48,4 @@ class FilledRange(BaseModel):
 
 class MessageResponse(BaseModel):
     message: str
-    filled_range: FilledRange
+    filled_range: FilledRange | None

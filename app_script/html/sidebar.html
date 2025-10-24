@@ -196,7 +196,7 @@
 
             const sheetName = selection.sheetName;
             const range = selection.activeRange;
-            const rangeTag = `<cells>'${sheetName}'!${range}<cells/>`;
+            const rangeTag = `<cells>'${sheetName}'!${range}</cells>`;
             appendToInput(rangeTag);
             appendMessage('Selected range: ' + range, 'bot');
           })

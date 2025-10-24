@@ -1,5 +1,7 @@
 import re
 
+from server.middleware.handle_http_exceptions import BadRequestError
+
 
 def extract_sheet_name_and_range(sheet_name_and_range: str):
     """
@@ -12,7 +14,7 @@ def extract_sheet_name_and_range(sheet_name_and_range: str):
     # Regex handles quoted sheet names like 'My Sheet'!A1:B5
     match = re.match(r"^'?([^'!]+)'?!?(.*)$", stripped)
     if not match:
-        raise ValueError(f"Invalid sheet reference format: {sheet_name_and_range}")
+        raise BadRequestError(f"Invalid sheet reference format: {sheet_name_and_range}")
 
     sheet_name = match.group(1).strip()
     range_a1 = match.group(2).strip()

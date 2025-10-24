@@ -5,7 +5,7 @@ from server.services import chat_service
 
 chat_router = APIRouter()
 
-@chat_router.post("/")
+@chat_router.post("")
 def handle_message(
     request: MessageRequest
 ):
