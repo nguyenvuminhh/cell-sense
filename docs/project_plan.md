@@ -25,12 +25,13 @@ The project will be consist of the following components:
 2. Set up a simple FastAPI backend that can receive requests from the frontend, process them.
 3. Integrate a LLM provider (Google Gemini) into the backend to handle natural language processing and formula generation.
 4. Implement user management and chat management using PostgreSQL database.
-5. Implement authorization and authentication (RBAC or Linux model) for secure access to the backend. Implement user tiers. Free user can use system's API key with limited usage and models, while paid user can use their own API key with no limit regarding usage or model.
-6. Implement chat session management and attach history to LLM requests for better context.
-7. Integrate additional LLM providers (OpenAI ChatGPT, Anthropic Claude), and allow user to input their own API keys.
-8. Do prompt engineering to improve the quality of generated formulas.
-9. Polishing the frontend, with better error display, loading effects, etc. Allow user to reject changes suggested by the AI assistant.
-10. Testing and debugging the entire system to ensure reliability and performance.
+5. Implement authorization and authentication for secure access to the backend.
+6. Implement user tiers. Free user can use system's API key with limited usage and models, while paid user can use their own API key with no limit regarding usage or model.
+7. Implement chat session management and attach history to LLM requests for better context.
+8. Integrate additional LLM providers (OpenAI ChatGPT, Anthropic Claude), and allow user to input their own API keys.
+9. Do prompt engineering to improve the quality of generated formulas.
+10. Polishing the frontend, with better error display, loading effects, etc. Allow user to reject changes suggested by the AI assistant.
+
 More tasks/features may be added as the project progresses.
 
 ### Logistics Tasks
@@ -46,3 +47,13 @@ More tasks/features may be added as the project progresses.
 - Meetings with advisor will be held bi-weekly to discuss progress, challenges, and next steps.
 - There will be a project report for each meeting summarizing progress and any issues encountered.
 - There will be a final project report and presentation/demo at the end of the semester.
+
+## Schedule
+- Start Date: 13th October 2025
+- End Date: 22nd February 2026
+- Number of Weeks: 19 weeks
+- Number of exam weeks: 4 weeks (1 for period I, 2 for period II, 1 for period III)
+- Number of Christmas and New Year weeks: 3 weeks
+- **Number of effective weeks:** 12 weeks
+
+- As there will be more development tasks in the future, the schedule is tentative and the next task will be agreed in the bi-weekly meetings with the advisor.
