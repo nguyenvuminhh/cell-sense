@@ -10,6 +10,8 @@ function buildQuery(query = {}) {
 
 
 function callApi(method, url, payload = {}, query = {}) {
+  const userEmail = Session.getActiveUser().getEmail()
+  query.user_email = userEmail;
   const fullUrl = url + buildQuery(query);
   const options = {
     method: method.toUpperCase(),
@@ -39,7 +41,7 @@ function callApi(method, url, payload = {}, query = {}) {
       throw new Error(`HTTP ${code}: ${text}`);
     }
   } catch (e) {
-    Logger.log('❌ Error: ' + e.message);
+    Logger.log('Error: ' + e.message);
     return { error: e.message };
   }
 }

@@ -13,11 +13,13 @@ _env = Environment(
     lstrip_blocks=True,
 )
 
+
 def get_all_prompt_template_names():
     """
     Return a list of all Jinja2 template filenames in the prompts/ directory.
     """
     return [f.name for f in BASE_DIR.glob("*.md")]
+
 
 def read_from_file(file_path: Path) -> str:
     """
@@ -25,6 +27,7 @@ def read_from_file(file_path: Path) -> str:
     """
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
+
 
 def get_prompt_template(name: str):
     """
@@ -35,5 +38,6 @@ def get_prompt_template(name: str):
     """
     template_content = read_from_file(BASE_DIR / name)
     return _env.from_string(template_content)
+
 
 __all__ = ["get_prompt_template", "get_all_prompt_template_names"]

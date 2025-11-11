@@ -21,7 +21,7 @@ docker_run:
 # ----------- RUN -----------
 .PHONY: run_dev
 run_dev:
-	poetry run uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
+	ENV=dev poetry run uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
 
 .PHONY: run_prod
 run_prod:
@@ -59,11 +59,51 @@ gcloud_deploy_to_cloud_run:
 .PHONY: gcloud_deploy_to_app_script
 gcloud_deploy_to_app_script:
 	cd app_script && clasp push
+
 # ----------- PRE-COMMIT -----------
 .PHONY: precommit
 precommit:
 	pre-commit run --all-files
 
+# ----------- DATABASE -----------
+.PHONY: spin_up_db
+spin_up_db:
+	docker compose up -d
+
+.PHONY: drop_db
+drop_db:
+	docker compose down -v
+
+.PHONY: upgrade_db
+upgrade_db:
+	ENV=dev alembic upgrade head
+
+.PHONY: reset_db
+reset_db: drop_db spin_up_db upgrade_db
+
+
+.PHONY: downgrade_db
+downgrade_db:
+	alembic downgrade -1
+
+.PHONY: new_migration
+new_migration:
+	alembic revision --autogenerate -m "$(MSG)"
+
+# ----------- TESTS -----------
+.PHONY: pre_test
+pre_test:
+	docker compose -f docker-compose.test.yml down -v
+	docker compose -f docker-compose.test.yml up -d
+	ENV=test alembic upgrade head
+
 .PHONY: test
 test:
-	echo "${GCP_ACCOUNT_EMAIL}"
+	ENV=test pytest -v --asyncio-mode=auto --tb=line tests/
+
+.PHONY: post_test
+post_test:
+	docker compose -f docker-compose.test.yml down -v
+
+.PHONY: run_test
+run_test: pre_test test post_test

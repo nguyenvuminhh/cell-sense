@@ -2,7 +2,15 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()
+from server.constants import Environments
+
+ENV = os.getenv("ENV", "development")
+
+# Load the right .env file
+if ENV == Environments.TEST:
+    load_dotenv(".env.test")
+elif ENV == Environments.DEVELOPMENT:
+    load_dotenv(".env")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 

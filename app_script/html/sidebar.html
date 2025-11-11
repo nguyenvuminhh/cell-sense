@@ -66,16 +66,6 @@
         align-items: center;
       }
 
-      /* Target cell label */
-      #target-label {
-        width: 100%;
-        font-size: 0.85rem;
-        color: #9ca3af;
-        margin-bottom: 6px;
-        text-align: left;
-      }
-
-      /* Chat input area (textarea + buttons all in one column) */
       #chat-input-group {
         display: flex;
         flex-direction: column;
@@ -84,7 +74,6 @@
         gap: 8px;
       }
 
-      /* Expandable textarea */
       #user-input {
         width: 100%;
         text-align: left;
@@ -99,7 +88,6 @@
         color: #ffffff;
         font-size: 1rem;
         box-sizing: border-box;
-        text-align: center;
         transition: height 0.1s ease;
         font-size: 0.9rem;
       }
@@ -109,7 +97,6 @@
         display: flex;
         justify-content: center;
         gap: 8px;
-        width: 100%;
       }
 
       .btn {
@@ -119,15 +106,15 @@
         border-radius: 8px;
         padding: 8px 16px;
         cursor: pointer;
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         min-width: 80px;
-        height: 36px;
+        height: 30px;
       }
 
       #select-btn {
         background: #1f2937;
       }
-      #set-btn {
+      #add-target-btn {
         background: #059669;
       }
       #send-btn {
@@ -140,14 +127,12 @@
     <div id="container">
       <div id="chat"></div>
 
-      <!-- ✅ unified input section -->
       <div id="input-area">
-        <div id="target-label">Target cell(s): <span id="target-value">-</span></div>
         <div id="chat-input-group">
-          <textarea id="user-input" placeholder="Ask something..." aria-label="Message input" style="text-align: left;"></textarea>
+          <textarea id="user-input" placeholder="Ask something..." aria-label="Message input"></textarea>
           <div class="btn-row">
-            <button id="select-btn" class="btn" onclick="fillSelectedRange()">Select</button>
-            <button id="set-btn" class="btn" onclick="setTargetCell()">Set</button>
+            <button id="select-btn" class="btn" onclick="fillSelectedRange()">Select Context</button>
+            <button id="add-target-btn" class="btn" onclick="addTargetCell()">Add Target</button>
           </div>
           <div class="btn-row">
             <button id="send-btn" class="btn" onclick="sendMessage()">Send</button>
@@ -157,9 +142,6 @@
     </div>
 
     <script>
-      // state: target cell
-      let targetCells = null;
-
       function appendMessage(text, sender) {
         const div = document.createElement('div');
         div.className = `chat-box ${sender}`;
@@ -169,7 +151,6 @@
         chat.scrollTop = chat.scrollHeight;
       }
 
-      // auto expand textarea
       const input = document.getElementById('user-input');
       input.addEventListener('input', function () {
         this.style.height = 'auto';
@@ -207,13 +188,13 @@
           .getActiveRangeA1Notation();
       }
 
-      function setTargetCell() {
-        const setBtn = document.getElementById('set-btn');
-        setBtn.disabled = true;
+      function addTargetCell() {
+        const addTargetBtn = document.getElementById('add-target-btn');
+        addTargetBtn.disabled = true;
 
         google.script.run
           .withSuccessHandler(function (selection) {
-            setBtn.disabled = false;
+            addTargetBtn.disabled = false;
             if (!selection) {
               appendMessage('No range selected in the spreadsheet.', 'bot');
               return;
@@ -221,12 +202,12 @@
 
             const sheetName = selection.sheetName;
             const range = selection.activeRange;
-            targetCells = `'${sheetName}'!${range}`;
-            document.getElementById('target-value').textContent = targetCells;
-            appendMessage('Target cell set to: ' + range, 'bot');
+            const targetTag = `<target>'${sheetName}'!${range}</target>`;
+            appendToInput(targetTag);
+            appendMessage('Added target: ' + range, 'bot');
           })
           .withFailureHandler(function (error) {
-            setBtn.disabled = false;
+            addTargetBtn.disabled = false;
             appendMessage(`Error: ${error.message || error}`, 'bot');
           })
           .getActiveRangeA1Notation();
@@ -237,12 +218,6 @@
         const message = input.value.trim();
         if (!message) return;
 
-        // Check if target cells is set
-        if (!targetCells) {
-          appendMessage('Please set a target cell first using the Set button.', 'bot');
-          return;
-        }
-
         appendMessage(message, 'user');
         input.value = '';
         input.style.height = '60px';
@@ -250,14 +225,11 @@
         google.script.run
           .withSuccessHandler(function (response) {
             appendMessage(response.reply, 'bot');
-            // Reset target cells after successful send
-            targetCells = null;
-            document.getElementById('target-value').textContent = '-';
           })
           .withFailureHandler(function (error) {
             appendMessage(`Error: ${error.message || error}`, 'bot');
           })
-          .handleMessage(message, targetCells);
+          .handleMessage(message);
       }
     </script>
   </body>

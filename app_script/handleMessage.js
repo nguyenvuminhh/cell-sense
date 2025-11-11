@@ -61,13 +61,12 @@ function extractRangesFromMessage(message) {
   return ranges;
 }
 
-function handleMessage(message, targetCells) {
+function handleMessage(message) {
   const selectedRanges = extractRangesFromMessage(message);
   const apiUrl = CONFIG.API_URL;
   const payload = {
     message,
     selected_ranges: selectedRanges,
-    target_range: {"sheet_name_and_range": targetCells},
     // llm_provider: "google",
     // llm_model: "gemini-2.5-flash"
   };
@@ -78,15 +77,17 @@ function handleMessage(message, targetCells) {
     return { reply: `Something went wrong: ${response.error}` };
   }
   try {
-    const filled_range = response.filled_range;
-    if (filled_range) {
+    const filled_ranges = response.filled_ranges;
+    if (filled_ranges) {
+      filled_ranges.forEach(filled_range => {
         const targetSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(filled_range.sheet_name);
         if (!targetSheet) {
           throw new Error(`Sheet not found: ${filled_range.sheet_name}`);
         }
 
-      const range = targetSheet.getRange(filled_range.range);
-      range.setFormulaR1C1(filled_range.r1c1_value);
+        const range = targetSheet.getRange(filled_range.range);
+        range.setFormulaR1C1(filled_range.r1c1_value);
+      });
     }
   } catch (err) {
     Logger.log("Error filling cells: " + err);
