@@ -1,6 +1,6 @@
 import re
 
-from server.middleware.handle_http_exceptions import BadRequestError
+from server.middleware import BadRequestError
 from server.utils import validate_a1_range_notation
 
 

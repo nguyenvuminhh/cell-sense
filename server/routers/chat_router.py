@@ -3,9 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter
 from fastapi.params import Depends
 
-from server.middleware.extract_user_from_request import (
-    extract_user_from_request,
-)
+from server.middleware import extract_user_from_request
 from server.models.chat_models import MessageRequest
 from server.models.user_models import User
 from server.services import chat_service

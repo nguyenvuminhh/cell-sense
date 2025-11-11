@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from server.middleware.handle_http_exceptions import (
+from server.middleware import (
     BadRequestError,
     InternalServerError,
     NotFoundError,

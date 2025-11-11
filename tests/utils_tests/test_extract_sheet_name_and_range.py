@@ -1,4 +1,4 @@
-from server.middleware.handle_http_exceptions import BadRequestError
+from server.middleware import BadRequestError
 from server.utils import extract_sheet_name_and_range
 
 

@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 
-from server import routers
-from server.middleware.handle_http_exceptions import handle_http_exceptions
-from server.middleware.log_request_body import log_request_body
-from server.middleware.remove_training_slash import remove_trailing_slash
+from server.middleware import (
+    handle_http_exceptions,
+    log_request_body,
+    remove_trailing_slash,
+)
+from server.routers import chat_router, error_router
 
 app = FastAPI(redirect_slashes=False)
 
@@ -22,5 +24,5 @@ def get_root():
     return "Hi"
 
 
-app.include_router(routers.chat_router, prefix="/chat")
-app.include_router(routers.error_router, prefix="/error")
+app.include_router(chat_router, prefix="/chat")
+app.include_router(error_router, prefix="/error")
