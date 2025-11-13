@@ -2,7 +2,7 @@ from typing import Any
 
 from server.constants import JinjaPromptTemplatesNames
 from server.middleware import InternalServerError
-from server.models.chat_models import MessageRequest
+from server.models.message_models import MessageRequest
 from server.utils import get_llm_client, parse_to_jinja_prompt
 
 

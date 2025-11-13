@@ -65,6 +65,10 @@ gcloud_deploy_to_app_script:
 precommit:
 	pre-commit run --all-files
 
+.PHONE: export_openapi_types
+export_openapi_types:
+	npx openapi-typescript http://localhost:8000/openapi.json --output app_script/types.ts
+
 # ----------- DATABASE -----------
 .PHONY: spin_up_db
 spin_up_db:
@@ -84,11 +88,11 @@ reset_db: drop_db spin_up_db upgrade_db
 
 .PHONY: downgrade_db
 downgrade_db:
-	alembic downgrade -1
+	ENV=dev alembic downgrade -1
 
 .PHONY: new_migration
 new_migration:
-	alembic revision --autogenerate -m "$(MSG)"
+	ENV=dev alembic revision --autogenerate -m "$(MSG)"
 
 # ----------- TESTS -----------
 .PHONY: pre_test

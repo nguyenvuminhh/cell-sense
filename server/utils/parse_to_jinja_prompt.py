@@ -1,5 +1,5 @@
 from server.constants import JinjaPromptTemplatesNames
-from server.models.chat_models import MessageRequest
+from server.models.message_models import MessageRequest
 from server.prompts import get_prompt_template
 
 

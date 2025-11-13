@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from server.config import DATABASE_URL
-from server.utils import BaseSchema
+from server.schemas import BaseSchema
 
 
 @pytest.fixture(scope="session")

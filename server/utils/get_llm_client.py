@@ -2,7 +2,7 @@ from google import genai
 
 from server.config import GEMINI_API_KEY
 from server.constants import LLMModels, LLMProviders, LLMProvidersToModels
-from server.middleware import InternalServerError
+from server.models.exception_models import InternalServerError
 
 
 def get_llm_client(

@@ -1,7 +1,12 @@
-from sqlalchemy import UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import TYPE_CHECKING
 
-from server.utils import BaseSchema
+from sqlalchemy import UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from server.schemas import BaseSchema
+
+if TYPE_CHECKING:
+    from server.schemas import ChatSchema
 
 
 class UserSchema(BaseSchema):
@@ -10,3 +15,11 @@ class UserSchema(BaseSchema):
 
     email: Mapped[str] = mapped_column(nullable=False)
     gemini_api_key: Mapped[str] = mapped_column(nullable=True)
+
+    # Relationships
+    chats: Mapped[list["ChatSchema"]] = relationship(
+        "ChatSchema",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        init=False,
+    )

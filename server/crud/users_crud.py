@@ -2,10 +2,11 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from server.models.user_models import User, UserRequest
-from server.schemas.user_schema import UserSchema
+from server.schemas import UserSchema
 from server.utils import get_database_async_session
 
 
+# --------------- Interface for Testing --------------- #
 async def _create_user(session: AsyncSession, user: UserRequest) -> User:
     user_data = UserSchema(**user.model_dump())
     session.add(user_data)
@@ -52,7 +53,7 @@ async def _delete_user(session: AsyncSession, id: int) -> bool:
     return False
 
 
-# Public API functions that manage their own sessions
+# --------------- Interface for Public calls --------------- #
 async def create_user(user: UserRequest) -> User:
     async with get_database_async_session() as session:
         async with session.begin():
