@@ -11,6 +11,7 @@ class Environments(StrEnum):
 
 class JinjaPromptTemplatesNames(StrEnum):
     LLM_REQUEST_PROMPT = "llm_request_prompt.md"
+    LLM_TITLE_NAMING_PROMPT = "llm_title_naming_prompt.md"
 
 
 class LLMProviders(StrEnum):
@@ -30,6 +31,8 @@ LLMProvidersToModels = {
         LLMModels.GOOGLE_GEMINI_2_5_PRO,
     ],
 }
+
+DEFAULT_CHAT_NAME = "New Chat"
 
 actual_names = get_all_prompt_template_names()
 for name in JinjaPromptTemplatesNames.__members__.values():

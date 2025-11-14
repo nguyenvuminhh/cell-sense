@@ -4,6 +4,7 @@ import sqlalchemy as sa
 from sqlalchemy import ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from server.constants import DEFAULT_CHAT_NAME
 from server.schemas import BaseSchema
 
 if TYPE_CHECKING:
@@ -15,7 +16,10 @@ class ChatSchema(BaseSchema):
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     title: Mapped[str] = mapped_column(
-        nullable=False, default="New Chat", server_default="New Chat"
+        nullable=False,
+        default=DEFAULT_CHAT_NAME,
+        server_default=DEFAULT_CHAT_NAME,
+        init=False,
     )
 
     # Relationships

@@ -7,6 +7,7 @@ from .handle_http_exceptions import (
 )
 from .log_request_body import log_request_body
 from .remove_trailing_slash import remove_trailing_slash
+from .verify_signature_from_apps_script import verify_signature_from_apps_script
 
 __all__ = [
     "extract_user_from_request",
@@ -16,4 +17,5 @@ __all__ = [
     "BadRequestError",
     "InternalServerError",
     "NotFoundError",
+    "verify_signature_from_apps_script",
 ]

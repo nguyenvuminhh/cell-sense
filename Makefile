@@ -56,18 +56,11 @@ gcloud_deploy_to_cloud_run:
 	make gcloud_push_to_artifact_registry && \
 	make gcloud_restart_cloud_run_service
 
-.PHONY: gcloud_deploy_to_app_script
-gcloud_deploy_to_app_script:
-	cd app_script && clasp push
 
 # ----------- PRE-COMMIT -----------
 .PHONY: precommit
 precommit:
 	pre-commit run --all-files
-
-.PHONE: export_openapi_types
-export_openapi_types:
-	npx openapi-typescript http://localhost:8000/openapi.json --output app_script/types.ts
 
 # ----------- DATABASE -----------
 .PHONY: spin_up_db
