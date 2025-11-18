@@ -28,3 +28,9 @@ class InternalServerError(CustomHTTPException):
     def __init__(self, detail: str = "Something went wrong."):
         self.status_code = 500
         self.detail = detail
+
+
+class InternalServerErrorPublic(CustomHTTPException):
+    def __init__(self, detail: str = "Internal server error."):
+        self.status_code = 500
+        self.detail = detail

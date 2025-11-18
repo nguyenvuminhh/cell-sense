@@ -1,7 +1,10 @@
 from typing import Type
 
+from google.genai.errors import ServerError
+
 from server.constants import JinjaPromptTemplatesNames, LLMModels
 from server.middleware import InternalServerError
+from server.models.exception_models import InternalServerErrorPublic
 from server.models.message_models import MessageRequest, MessageResponse
 from server.utils import get_llm_client, parse_to_jinja_prompt
 
@@ -28,13 +31,19 @@ def generate_response(
         config = {
             "response_mime_type": "text/plain",
         }
-
-    response = client.models.generate_content(
-        model=LLMModels.GOOGLE_GEMINI_2_5_PRO,  # message_request.llm_model.value,
-        contents=prompt,
-        config=config,  # type: ignore
-    )
-
-    if response.text is None:
-        raise InternalServerError(f"LLM request failed: {response}")
-    return response.text
+    try:
+        response = client.models.generate_content(
+            model=LLMModels.GOOGLE_GEMINI_2_5_PRO,  # message_request.llm_model.value,
+            contents=prompt,
+            config=config,  # type: ignore
+        )
+        if response.text is None:
+            raise InternalServerError(f"LLM request failed: {response}")
+        return response.text
+    except ServerError as e:
+        if e.code == 503:
+            raise InternalServerErrorPublic(
+                "LLM service is currently unavailable. Please try again later."
+            )
+        else:
+            raise InternalServerError(f"LLM request failed: {e.message}")

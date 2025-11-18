@@ -3,6 +3,7 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
+from server.config import SKIP_AUTH_PATHS
 from server.utils.verify_signature import verify_signature
 
 
@@ -10,11 +11,10 @@ async def verify_signature_from_apps_script(request: Request, call_next):
     """
     Middleware to validate signatures from Google Apps Script.
     GAS signs:
-        RSA-SHA256(JSON.stringify(payload) + full_url)
+        RSA-SHA256(JSON.stringify(payload) + full_url (including timestamps))
     """
 
-    skip_paths = ["/ping", "/error/", "/docs", "/openapi.json"]
-    if any(request.url.path.startswith(path) for path in skip_paths):
+    if any(request.url.path.startswith(path) for path in SKIP_AUTH_PATHS):
         return await call_next(request)
     signature_b64 = request.headers.get("X-Signature")
     if not signature_b64:

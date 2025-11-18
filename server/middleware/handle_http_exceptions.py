@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from server.models.exception_models import (
     BadRequestError,
     InternalServerError,
+    InternalServerErrorPublic,
     NotFoundError,
 )
 from server.utils import get_logger
@@ -14,7 +15,7 @@ logger = get_logger()
 async def handle_http_exceptions(request: Request, call_next):
     try:
         return await call_next(request)
-    except (NotFoundError, BadRequestError) as e:
+    except (NotFoundError, BadRequestError, InternalServerErrorPublic) as e:
         # Re-raise known HTTP errors so FastAPI handles them
         logger.error("An unexpected error occurred.", exc_info=True)
 
@@ -26,6 +27,7 @@ async def handle_http_exceptions(request: Request, call_next):
         )
         e.detail = "Something went wrong!"
         return e()
+
     except Exception:
         # Log and handle unexpected errors
         logger.error("An unexpected error occurred.", exc_info=True)
