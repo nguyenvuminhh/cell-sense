@@ -8,6 +8,7 @@ from .handle_http_exceptions import (
 from .log_request_body import log_request_body
 from .remove_trailing_slash import remove_trailing_slash
 from .verify_signature_from_apps_script import verify_signature_from_apps_script
+from .verify_timestamps import verify_timestamps
 
 __all__ = [
     "extract_user_from_request",
@@ -18,4 +19,5 @@ __all__ = [
     "InternalServerError",
     "NotFoundError",
     "verify_signature_from_apps_script",
+    "verify_timestamps",
 ]

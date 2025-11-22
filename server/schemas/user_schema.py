@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from server.schemas import BaseSchema
 
 if TYPE_CHECKING:
-    from server.schemas import ChatSchema
+    from server.schemas import ChatSchema, FreeUserQuotaSchema
 
 
 class UserSchema(BaseSchema):
@@ -22,4 +22,12 @@ class UserSchema(BaseSchema):
         back_populates="user",
         cascade="all, delete-orphan",
         init=False,
+    )
+
+    free_user_quota: Mapped["FreeUserQuotaSchema"] = relationship(
+        "FreeUserQuotaSchema",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        init=False,
+        uselist=False,
     )

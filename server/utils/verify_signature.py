@@ -8,11 +8,6 @@ from server.config import SIGNATURE_PUBLIC_KEY_PATH
 
 
 def verify_signature(payload: dict, full_url: str, signature_b64: str) -> bool:
-    """
-    Verify signature created by Apps Script:
-    signature = RSA-SHA256(JSON.stringify(payload) + full_url)
-    """
-
     # 1. Reconstruct signed message exactly like GAS
     data = json.dumps(payload, separators=(",", ":")) + full_url
 

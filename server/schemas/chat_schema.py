@@ -43,13 +43,18 @@ class ChatMessageSchema(BaseSchema):
             "is_from_user = true OR model_name IS NOT NULL",
             name="ck_chat_messages_model_name_required",
         ),
+        sa.CheckConstraint(
+            "CASE WHEN is_from_user = true THEN full_user_prompt IS NOT NULL ELSE full_model_response IS NOT NULL END",
+            name="check_full_prompt_response",
+        ),
     )
 
     chat_id: Mapped[int] = mapped_column(ForeignKey("chats.id"), nullable=False)
     is_from_user: Mapped[bool] = mapped_column(nullable=False)
     content: Mapped[str] = mapped_column(Text, nullable=False)
     model_name: Mapped[str | None] = mapped_column(nullable=True)
-
+    full_user_prompt: Mapped[str | None] = mapped_column(Text, nullable=True)
+    full_model_response: Mapped[str | None] = mapped_column(Text, nullable=True)
     # Relationships
     chat: Mapped["ChatSchema"] = relationship(
         "ChatSchema",

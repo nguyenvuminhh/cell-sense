@@ -16,7 +16,7 @@ class BaseSchema(DeclarativeBase, MappedAsDataclass):
     )
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
+        DateTime(),
         server_default=func.now(),
         nullable=False,
         init=False,
@@ -24,7 +24,7 @@ class BaseSchema(DeclarativeBase, MappedAsDataclass):
 
     # Automatically updated whenever record changes
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
+        DateTime(),
         server_default=func.now(),
         onupdate=func.now(),
         nullable=False,

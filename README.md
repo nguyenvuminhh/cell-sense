@@ -10,3 +10,5 @@ todo:
 - fix the text box form scrolling
 - context histoory
 - acp reject changes
+- test controller instead of crud
+- display error isntead of appending to chat

@@ -1,12 +1,11 @@
 from google import genai
 
-from server.config import GEMINI_API_KEY
 from server.constants import LLMModels, LLMProviders, LLMProvidersToModels
 from server.models.exception_models import InternalServerError
 
 
 def get_llm_client(
-    llm_provider: LLMProviders, llm_model: LLMModels
+    llm_provider: LLMProviders, llm_model: LLMModels, api_key: str
 ) -> genai.Client:
     if llm_model not in LLMProvidersToModels[llm_provider]:
         raise InternalServerError(
@@ -14,7 +13,6 @@ def get_llm_client(
         )
 
     if llm_provider == LLMProviders.GOOGLE:
-        api_key = GEMINI_API_KEY
         if not api_key:
             raise InternalServerError(
                 "GEMINI_API_KEY is not set in the environment variables."

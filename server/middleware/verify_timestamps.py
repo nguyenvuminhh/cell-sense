@@ -7,12 +7,6 @@ from server.config import MAX_TIMESTAMP_DIFF_SECONDS, SKIP_AUTH_PATHS
 
 
 async def verify_timestamps(request: Request, call_next):
-    """
-    Middleware to verify that the request contains a valid `timestamp`
-    query parameter in ISO8601 format (e.g., 2025-11-18T09:12:55.123Z).
-
-    Rejects requests older than 1 minutes to prevent replay attacks.
-    """
     if any(request.url.path.startswith(path) for path in SKIP_AUTH_PATHS):
         return await call_next(request)
     timestamp = request.query_params.get("timestamp")
@@ -36,10 +30,13 @@ async def verify_timestamps(request: Request, call_next):
     # Validate recency
     if (
         diff > timedelta(seconds=MAX_TIMESTAMP_DIFF_SECONDS)
-        or diff.total_seconds() < 0
+        or diff.total_seconds() < -10
     ):
         return JSONResponse(
-            {"detail": "Timestamp too old or from the future."}, status_code=401
+            {
+                "detail": f"Timestamp too old or from the future. Diff: {diff.total_seconds()} seconds"
+            },
+            status_code=401,
         )
 
     return await call_next(request)

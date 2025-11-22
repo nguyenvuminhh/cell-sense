@@ -27,13 +27,13 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), primary_key=True),
         sa.Column(
             "created_at",
-            sa.DateTime(timezone=True),
+            sa.DateTime(),
             nullable=False,
             server_default=sa.func.now(),
         ),
         sa.Column(
             "updated_at",
-            sa.DateTime(timezone=True),
+            sa.DateTime(),
             nullable=False,
             server_default=sa.func.now(),
             server_onupdate=sa.func.now(),
@@ -55,13 +55,13 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), primary_key=True),
         sa.Column(
             "created_at",
-            sa.DateTime(timezone=True),
+            sa.DateTime(),
             nullable=False,
             server_default=sa.func.now(),
         ),
         sa.Column(
             "updated_at",
-            sa.DateTime(timezone=True),
+            sa.DateTime(),
             nullable=False,
             server_default=sa.func.now(),
             server_onupdate=sa.func.now(),

@@ -29,3 +29,4 @@ SIGNATURE_PUBLIC_KEY_PATH = "assets/public.pem"
 
 MAX_TIMESTAMP_DIFF_SECONDS = 60  # 1 minute
 SKIP_AUTH_PATHS = ["/ping", "/error/", "/docs", "/openapi.json"]
+FREE_USER_DAILY_QUOTA = 10

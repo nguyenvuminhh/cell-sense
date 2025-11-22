@@ -3,7 +3,7 @@ from typing import Any, List
 
 from pydantic import BaseModel, computed_field
 
-from server.constants import LLMModels, LLMProviders
+from server.constants import GeminiHistoryRoles, LLMModels, LLMProviders
 from server.utils import extract_sheet_name_and_range, extract_target_cell
 
 
@@ -58,3 +58,24 @@ class FilledRange(BaseModel):
 class MessageResponse(BaseModel):
     message: str
     filled_ranges: list[FilledRange]
+
+
+class UserPromptAndModelResponse(BaseModel):
+    full_user_prompt: str
+    full_model_response: str
+
+
+# ----- Title Naming Models -----
+class TitleNamingResponse(BaseModel):
+    title: str
+    message_is_unclear: bool
+
+
+# ----- Gemini History Models -----
+class GeminiHistoryPart(BaseModel):
+    text: str
+
+
+class GeminiHistoryEntry(BaseModel):
+    role: GeminiHistoryRoles
+    parts: list[GeminiHistoryPart]

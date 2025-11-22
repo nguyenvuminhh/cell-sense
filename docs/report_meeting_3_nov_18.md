@@ -99,7 +99,7 @@ verifed = Verify(PublicKey, SHA256(RequestBody + RequestURL), signature)
 This model is inspired by how webhooks are secured using signatures (I observed from working with [Twilio](https://www.twilio.com/docs/usage/security#validating-requests)), ensuring that requests are indeed from the trusted source.
 
 ## Timestamp-based Replay Attack Prevention
-- Each request from the Apps Script includes a timestamp in the URL query parameters.
+- Each request from the Apps Script includes a timestamp in the URL query parameters (so the signature covers the timestamp as well).
 - The backend checks if the timestamp is within an acceptable range (e.g., within the last 1 minutes).
 - If the timestamp is too old, the request is rejected to prevent replay attacks.
 - This prevents the attacker to capture a valid request (including the signature) and resend it later to perform unauthorized actions.

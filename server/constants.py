@@ -32,6 +32,12 @@ LLMProvidersToModels = {
     ],
 }
 
+
+class GeminiHistoryRoles(StrEnum):
+    USER = "user"
+    MODEL = "model"
+
+
 DEFAULT_CHAT_NAME = "New Chat"
 
 actual_names = get_all_prompt_template_names()

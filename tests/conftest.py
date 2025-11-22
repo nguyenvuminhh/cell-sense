@@ -14,7 +14,6 @@ from server.schemas import BaseSchema
 
 @pytest.fixture(scope="session")
 def event_loop():
-    """Create an instance of the default event loop for the test session."""
     policy = asyncio.get_event_loop_policy()
     loop = policy.new_event_loop()
     yield loop
@@ -23,7 +22,6 @@ def event_loop():
 
 @pytest.fixture(scope="function")
 async def db_session():
-    """Create a fresh database session for each test."""
     engine = create_async_engine(DATABASE_URL, echo=False)
 
     async with engine.begin() as conn:
