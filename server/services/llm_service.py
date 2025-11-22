@@ -1,6 +1,7 @@
 from typing import Type
 
 from google.genai.errors import ServerError
+from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from server.constants import (
     GeminiHistoryRoles,
@@ -23,6 +24,7 @@ from server.utils import get_llm_client, parse_to_jinja_prompt
 
 
 async def generate_response(
+    session: AsyncSession,
     message_request: MessageRequest,
     template_name: JinjaPromptTemplatesNames,
     response_schema: Type[MessageResponse] | Type[TitleNamingResponse],
@@ -31,6 +33,7 @@ async def generate_response(
 ) -> UserPromptAndModelResponse:
     if message_request.llm_provider == LLMProviders.GOOGLE:
         return await _generate_response_for_gemini(
+            session=session,
             message_request=message_request,
             template_name=template_name,
             response_schema=response_schema,
@@ -44,6 +47,7 @@ async def generate_response(
 
 
 async def _generate_response_for_gemini(
+    session: AsyncSession,
     message_request: MessageRequest,
     template_name: JinjaPromptTemplatesNames,
     response_schema: Type[MessageResponse] | Type[TitleNamingResponse],
@@ -61,6 +65,7 @@ async def _generate_response_for_gemini(
         message_request=message_request,
         template_name=template_name,
         chat_id=chat_id,
+        session=session,
     )
     print("Content History for Gemini:", content_history)
     try:
@@ -89,6 +94,7 @@ async def _generate_response_for_gemini(
 
 
 async def _build_gemini_content_history(
+    session: AsyncSession,
     message_request: MessageRequest,
     template_name: JinjaPromptTemplatesNames,
     chat_id: int | None,
@@ -106,8 +112,8 @@ async def _build_gemini_content_history(
             )
         ]
     else:
-        messages = await chats_crud.get_messages_by_chat(chat_id)
-        for message in messages:
+        messages = await chats_crud.get_messages_by_chat(session, chat_id)
+        for message in messages[:30]:
             role = (
                 GeminiHistoryRoles.USER
                 if message.is_from_user
@@ -125,4 +131,4 @@ async def _build_gemini_content_history(
             )
         )
 
-    return [entry for entry in history]
+    return history

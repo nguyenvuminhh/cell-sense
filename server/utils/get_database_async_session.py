@@ -1,6 +1,5 @@
 from collections.abc import AsyncGenerator
 
-from fastapi.concurrency import asynccontextmanager
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
@@ -13,7 +12,13 @@ local_session = async_sessionmaker(
 )
 
 
-@asynccontextmanager
 async def get_database_async_session() -> AsyncGenerator[AsyncSession, None]:
     async with local_session() as session:
-        yield session
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()

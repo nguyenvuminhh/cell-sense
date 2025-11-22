@@ -1,4 +1,5 @@
 from fastapi import HTTPException
+from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from server.config import GEMINI_API_KEY
 from server.constants import (
@@ -21,26 +22,28 @@ from server.services import llm_service
 
 
 async def handle_message(
+    session: AsyncSession,
     request: MessageRequest,
     free_user_quota: FreeUserQuota,
     user: User,
     chat_id: int,
 ) -> MessageResponse:
     # Check if chat has not messages
-    chat = await chats_crud.get_chat(chat_id)
+    chat = await chats_crud.get_chat(session, chat_id)
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
 
     if chat.title == DEFAULT_CHAT_NAME:
-        title = await _get_chat_title(request)
+        title = await _get_chat_title(session, request)
         if title is not None and title != "":
-            await chats_crud.update_chat(chat.id, title)
+            await chats_crud.update_chat(session, chat.id, title)
 
     prompt_and_response = await llm_service.generate_response(
-        request,
+        session=session,
+        message_request=request,
         template_name=JinjaPromptTemplatesNames.LLM_REQUEST_PROMPT,
         response_schema=MessageResponse,
-        api_key=await _get_api_key(request, user),
+        api_key=await _get_api_key(session, request, user),
         chat_id=chat_id,
     )
     response_model = MessageResponse.model_validate_json(
@@ -60,37 +63,37 @@ async def handle_message(
         model_name=request.llm_model,
         full_model_response=prompt_and_response.full_model_response,
     )
-    await chats_crud.create_message(user_message_request)
-    await chats_crud.create_message(llm_message_request)
+    await chats_crud.create_message(session, user_message_request)
+    await chats_crud.create_message(session, llm_message_request)
     return response_model
 
 
-async def get_user_chats(user: User) -> list[Chat]:
-    chat_list = await chats_crud.get_chats_by_user(user.id)
+async def get_user_chats(user: User, session: AsyncSession) -> list[Chat]:
+    chat_list = await chats_crud.get_chats_by_user(session, user.id)
 
     # Delete chats with 0 messages
     empty_chat_ids = [chat.id for chat in chat_list if len(chat.messages) == 0]
-    await chats_crud.delete_chats(empty_chat_ids)
+    await chats_crud.delete_chats(session, empty_chat_ids)
 
     filtered_chats = [chat for chat in chat_list if len(chat.messages) > 0]
     return filtered_chats
 
 
-async def create_chat(user: User) -> Chat:
-    return await chats_crud.create_chat(user.id)
+async def create_chat(session: AsyncSession, user: User) -> Chat:
+    return await chats_crud.create_chat(session, user.id)
 
 
-async def get_latest_chat(user: User) -> Chat:
-    chats = await chats_crud.get_chats_by_user(user.id)
+async def get_latest_chat(session: AsyncSession, user: User) -> Chat:
+    chats = await chats_crud.get_chats_by_user(session, user.id)
     if not chats:
-        chat = await chats_crud.create_chat(user.id)
+        chat = await chats_crud.create_chat(session, user.id)
         return chat
     # Chats are ordered by updated_at desc in the CRUD function
     return chats[0]
 
 
-async def get_chat(chat_id: int, user: User) -> Chat:
-    chat = await chats_crud.get_chat(chat_id)
+async def get_chat(session: AsyncSession, chat_id: int, user: User) -> Chat:
+    chat = await chats_crud.get_chat(session, chat_id)
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
@@ -98,31 +101,36 @@ async def get_chat(chat_id: int, user: User) -> Chat:
     return chat
 
 
-async def delete_chat(chat_id: int, user: User) -> bool:
-    chat = await chats_crud.get_chat(chat_id)
+async def delete_chat(session: AsyncSession, chat_id: int, user: User) -> bool:
+    chat = await chats_crud.get_chat(session, chat_id)
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
         raise HTTPException(status_code=403, detail="Access denied")
-    success = await chats_crud.delete_chat(chat_id)
+    success = await chats_crud.delete_chat(session, chat_id)
     if not success:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     return success
 
 
-async def get_chat_messages(chat_id: int, user: User) -> list[ChatMessage]:
-    chat = await chats_crud.get_chat(chat_id)
+async def get_chat_messages(
+    session: AsyncSession, chat_id: int, user: User
+) -> list[ChatMessage]:
+    chat = await chats_crud.get_chat(session, chat_id)
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
         raise HTTPException(status_code=403, detail="Access denied")
-    return await chats_crud.get_messages_by_chat(chat_id)
+    return await chats_crud.get_messages_by_chat(session, chat_id)
 
 
 async def create_message(
-    chat_id: int, user: User, message_request: ChatMessageRequest
+    session: AsyncSession,
+    chat_id: int,
+    user: User,
+    message_request: ChatMessageRequest,
 ) -> ChatMessage:
-    chat = await chats_crud.get_chat(chat_id)
+    chat = await chats_crud.get_chat(session, chat_id)
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
@@ -132,24 +140,27 @@ async def create_message(
             status_code=400,
             detail="chat_id in request body must match URL parameter",
         )
-    return await chats_crud.create_message(message_request)
+    return await chats_crud.create_message(session, message_request)
 
 
-async def delete_message(message_id: int) -> bool:
-    success = await chats_crud.delete_message(message_id)
+async def delete_message(session: AsyncSession, message_id: int) -> bool:
+    success = await chats_crud.delete_message(session, message_id)
     if not success:
         raise NotFoundError(f"Message with id {message_id} not found")
     return success
 
 
-async def _get_chat_title(message: MessageRequest) -> str:
+async def _get_chat_title(
+    session: AsyncSession, message: MessageRequest
+) -> str:
     system_api_key = GEMINI_API_KEY
     if not system_api_key:
         raise InternalServerError(
             "GEMINI_API_KEY is not set in the environment variables."
         )
     prompt_and_response = await llm_service.generate_response(
-        message,
+        session=session,
+        message_request=message,
         template_name=JinjaPromptTemplatesNames.LLM_TITLE_NAMING_PROMPT,
         response_schema=TitleNamingResponse,
         api_key=system_api_key,
@@ -166,11 +177,15 @@ async def _get_chat_title(message: MessageRequest) -> str:
     return new_title
 
 
-async def _get_api_key(request: MessageRequest, user: User) -> str:
+async def _get_api_key(
+    session: AsyncSession, request: MessageRequest, user: User
+) -> str:
     if request.llm_provider == LLMProviders.GOOGLE:
         if not user.gemini_api_key:
             quota_model, success = (
-                await free_user_quota_crud.decrement_free_user_quota(user.id)
+                await free_user_quota_crud.decrement_free_user_quota(
+                    session, user.id
+                )
             )
             if not quota_model:
                 raise NotFoundError("Free user quota not found.")

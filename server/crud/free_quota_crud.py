@@ -1,30 +1,11 @@
-from datetime import datetime, time
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server import config
 from server.models.free_user_quota_models import (
     FreeUserQuota,
     FreeUserQuotaRequest,
 )
 from server.schemas import FreeUserQuotaSchema
-
-
-async def _reset_quota(
-    session: AsyncSession,
-    quota_record: FreeUserQuotaSchema,
-) -> FreeUserQuotaSchema:
-    if quota_record.next_reset <= datetime.now():
-        quota_record.free_quota_remaining = config.FREE_USER_DAILY_QUOTA
-        quota_record.next_reset = datetime.combine(
-            datetime.today(), time(23, 59, 59)
-        )
-        session.add(quota_record)
-        await session.flush()
-        await session.refresh(quota_record)
-        return quota_record
-    return quota_record
 
 
 async def create_free_user_quota(
@@ -51,7 +32,27 @@ async def get_free_user_quota_by_user_id(
     result = await session.execute(query)
     quota_record = result.scalar_one_or_none()
     if quota_record:
-        quota_record = await _reset_quota(session, quota_record)
+        return FreeUserQuota(**quota_record.__dict__)
+    return None
+
+
+async def update_free_user_quota(
+    session: AsyncSession,
+    request: FreeUserQuotaRequest,
+) -> FreeUserQuota | None:
+    query = select(FreeUserQuotaSchema).where(
+        FreeUserQuotaSchema.user_id == request.user_id
+    )
+    result = await session.execute(query)
+    quota_record = result.scalar_one_or_none()
+    if quota_record:
+        if request.free_quota_remaining is not None:
+            quota_record.free_quota_remaining = request.free_quota_remaining
+        if request.next_reset is not None:
+            quota_record.next_reset = request.next_reset
+        session.add(quota_record)
+        await session.flush()
+        await session.refresh(quota_record)
         return FreeUserQuota(**quota_record.__dict__)
     return None
 
@@ -59,13 +60,13 @@ async def get_free_user_quota_by_user_id(
 async def decrement_free_user_quota(
     session: AsyncSession, user_id: int
 ) -> tuple[FreeUserQuota | None, bool]:
+    """Decrement the free quota by the specified amount."""
     query = select(FreeUserQuotaSchema).where(
         FreeUserQuotaSchema.user_id == user_id
     )
     result = await session.execute(query)
     quota_record = result.scalar_one_or_none()
     if quota_record:
-        quota_record = await _reset_quota(session, quota_record)
         if quota_record.free_quota_remaining <= 0:
             return FreeUserQuota(**quota_record.__dict__), False
         quota_record.free_quota_remaining = (

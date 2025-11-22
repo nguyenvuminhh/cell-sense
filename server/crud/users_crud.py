@@ -3,11 +3,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from server.models.user_models import User, UserRequest
 from server.schemas import UserSchema
-from server.utils import get_database_async_session
 
 
-# --------------- Interface for Testing --------------- #
-async def _create_user(session: AsyncSession, user: UserRequest) -> User:
+async def create_user(session: AsyncSession, user: UserRequest) -> User:
     user_data = UserSchema(**user.model_dump())
     session.add(user_data)
     await session.flush()
@@ -15,7 +13,7 @@ async def _create_user(session: AsyncSession, user: UserRequest) -> User:
     return User(**user_data.__dict__)
 
 
-async def _get_user_with_email(
+async def get_user_with_email(
     session: AsyncSession, email: str | None = None
 ) -> User | None:
     query = select(UserSchema).where(UserSchema.email == email)
@@ -26,7 +24,7 @@ async def _get_user_with_email(
     return None
 
 
-async def _update_user(
+async def update_user(
     session: AsyncSession, id: int, user_update: UserRequest
 ) -> User | None:
     query = select(UserSchema).where(UserSchema.id == id)
@@ -42,7 +40,7 @@ async def _update_user(
     return None
 
 
-async def _delete_user(session: AsyncSession, id: int) -> bool:
+async def delete_user(session: AsyncSession, id: int) -> bool:
     query = select(UserSchema).where(UserSchema.id == id)
     result = await session.execute(query)
     user_record = result.scalar_one_or_none()
@@ -51,28 +49,3 @@ async def _delete_user(session: AsyncSession, id: int) -> bool:
         await session.flush()
         return True
     return False
-
-
-# --------------- Interface for Public calls --------------- #
-async def create_user(user: UserRequest) -> User:
-    async with get_database_async_session() as session:
-        async with session.begin():
-            return await _create_user(session, user)
-
-
-async def get_user_with_email(email: str | None = None) -> User | None:
-    async with get_database_async_session() as session:
-        async with session.begin():
-            return await _get_user_with_email(session, email)
-
-
-async def update_user(id: int, user_update: UserRequest) -> User | None:
-    async with get_database_async_session() as session:
-        async with session.begin():
-            return await _update_user(session, id, user_update)
-
-
-async def delete_user(id: int) -> bool:
-    async with get_database_async_session() as session:
-        async with session.begin():
-            return await _delete_user(session, id)
