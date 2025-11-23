@@ -28,9 +28,7 @@ async def send_message(
     session: Annotated[AsyncSession, Depends(get_database_async_session)],
     chat_id: int,
 ) -> MessageResponse:
-    return await chat_service.handle_message(
-        session, request, free_user_quota, user, chat_id
-    )
+    return await chat_service.handle_message(session, request, user, chat_id)
 
 
 @chat_router.get("/list", response_model=list[Chat])
@@ -38,7 +36,6 @@ async def get_chat_list(
     user: Annotated[User, Depends(extract_user_from_request)],
     session: Annotated[AsyncSession, Depends(get_database_async_session)],
 ) -> list[Chat]:
-
     return await chat_service.get_user_chats(user, session)
 
 

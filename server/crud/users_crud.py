@@ -6,6 +6,7 @@ from server.schemas import UserSchema
 
 
 async def create_user(session: AsyncSession, user: UserRequest) -> User:
+    await get_user_with_email(session, email=user.email)
     user_data = UserSchema(**user.model_dump())
     session.add(user_data)
     await session.flush()

@@ -10,8 +10,11 @@ from server.constants import (
 from server.crud import chats_crud, free_user_quota_crud
 from server.middleware import NotFoundError
 from server.models.chat_models import Chat, ChatMessage, ChatMessageRequest
-from server.models.exception_models import BadRequestError, InternalServerError
-from server.models.free_user_quota_models import FreeUserQuota
+from server.models.exception_models import (
+    BadRequestError,
+    ForbiddenError,
+    InternalServerError,
+)
 from server.models.message_models import (
     MessageRequest,
     MessageResponse,
@@ -24,7 +27,6 @@ from server.services import llm_service
 async def handle_message(
     session: AsyncSession,
     request: MessageRequest,
-    free_user_quota: FreeUserQuota,
     user: User,
     chat_id: int,
 ) -> MessageResponse:
@@ -97,7 +99,7 @@ async def get_chat(session: AsyncSession, chat_id: int, user: User) -> Chat:
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
-        raise HTTPException(status_code=403, detail="Access denied")
+        raise ForbiddenError()
     return chat
 
 
@@ -106,7 +108,7 @@ async def delete_chat(session: AsyncSession, chat_id: int, user: User) -> bool:
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
-        raise HTTPException(status_code=403, detail="Access denied")
+        raise ForbiddenError()
     success = await chats_crud.delete_chat(session, chat_id)
     if not success:
         raise NotFoundError(f"Chat with id {chat_id} not found")

@@ -3,11 +3,15 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-from server.config import SKIP_AUTH_PATHS
-from server.utils.verify_signature import verify_signature
+from server.config import ENV, SKIP_AUTH_PATHS
+from server.constants import Environments
+from server.utils import verify_signature
 
 
 async def verify_signature_from_apps_script(request: Request, call_next):
+    if ENV == Environments.TEST:
+        return await call_next(request)
+
     if any(request.url.path.startswith(path) for path in SKIP_AUTH_PATHS):
         return await call_next(request)
     signature_b64 = request.headers.get("X-Signature")

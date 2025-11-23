@@ -18,7 +18,6 @@ async def handle_http_exceptions(request: Request, call_next):
     except (NotFoundError, BadRequestError, InternalServerErrorPublic) as e:
         # Re-raise known HTTP errors so FastAPI handles them
         logger.error("An unexpected error occurred.")
-
         return e()
     except InternalServerError as e:
         # Log internal server errors

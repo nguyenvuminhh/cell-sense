@@ -96,7 +96,7 @@ pre_test:
 
 .PHONY: test
 test:
-	ENV=test pytest -v --asyncio-mode=auto --tb=line tests/
+	ENV=test pytest -v --asyncio-mode=auto --tb=line tests/$(DIR)
 
 .PHONY: post_test
 post_test:

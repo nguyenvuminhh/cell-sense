@@ -18,6 +18,12 @@ class NotFoundError(CustomHTTPException):
         self.detail = detail
 
 
+class ForbiddenError(CustomHTTPException):
+    def __init__(self, detail: str = "Access forbidden."):
+        self.status_code = 403
+        self.detail = detail
+
+
 class BadRequestError(CustomHTTPException):
     def __init__(self, detail: str = "Bad request."):
         self.status_code = 400
