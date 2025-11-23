@@ -1,17 +1,19 @@
 from typing import Type
 
-from google.genai.errors import ServerError
+from google.genai.errors import ClientError, ServerError
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from server.constants import (
     GeminiHistoryRoles,
     JinjaPromptTemplatesNames,
-    LLMModels,
     LLMProviders,
 )
 from server.crud import chats_crud
 from server.middleware import InternalServerError
-from server.models.exception_models import InternalServerErrorPublic
+from server.models.exception_models import (
+    BadRequestError,
+    InternalServerErrorPublic,
+)
 from server.models.message_models import (
     GeminiHistoryEntry,
     GeminiHistoryPart,
@@ -70,7 +72,7 @@ async def _generate_response_for_gemini(
     print("Content History for Gemini:", content_history)
     try:
         response = client.models.generate_content(
-            model=LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE,  # message_request.llm_model.value,
+            model=message_request.llm_model.value,
             contents=content_history,
             config={
                 "response_mime_type": "application/json",
@@ -89,6 +91,11 @@ async def _generate_response_for_gemini(
             raise InternalServerErrorPublic(
                 "LLM service is currently unavailable. Please try again later."
             )
+        else:
+            raise InternalServerError(f"LLM request failed: {e.message}")
+    except ClientError as e:
+        if e.code == 400:
+            raise BadRequestError(f"LLM request failed: {e.message}")
         else:
             raise InternalServerError(f"LLM request failed: {e.message}")
 

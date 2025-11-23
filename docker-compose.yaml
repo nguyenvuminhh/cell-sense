@@ -1,12 +1,18 @@
 services:
   db:
     image: postgres:16
+    container_name: backend-db
     env_file:
       - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5436:5432"
+    networks:
+      - backend-network
 
 volumes:
   postgres_data:
+
+networks:
+  backend-network:

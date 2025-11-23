@@ -5,6 +5,7 @@ from server.config import GEMINI_API_KEY
 from server.constants import (
     DEFAULT_CHAT_NAME,
     JinjaPromptTemplatesNames,
+    LLMModels,
     LLMProviders,
 )
 from server.crud import chats_crud, free_user_quota_crud
@@ -122,7 +123,7 @@ async def get_chat_messages(
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
-        raise HTTPException(status_code=403, detail="Access denied")
+        raise ForbiddenError()
     return await chats_crud.get_messages_by_chat(session, chat_id)
 
 
@@ -136,7 +137,7 @@ async def create_message(
     if not chat:
         raise NotFoundError(f"Chat with id {chat_id} not found")
     if chat.user_id != user.id:
-        raise HTTPException(status_code=403, detail="Access denied")
+        raise ForbiddenError()
     if message_request.chat_id != chat_id:
         raise HTTPException(
             status_code=400,
@@ -155,7 +156,10 @@ async def delete_message(session: AsyncSession, message_id: int) -> bool:
 async def _get_chat_title(
     session: AsyncSession, message: MessageRequest
 ) -> str:
+
+    # Use the best model for title naming
     system_api_key = GEMINI_API_KEY
+    message.llm_model = LLMModels.GOOGLE_GEMINI_2_5_PRO
     if not system_api_key:
         raise InternalServerError(
             "GEMINI_API_KEY is not set in the environment variables."
@@ -182,24 +186,38 @@ async def _get_chat_title(
 async def _get_api_key(
     session: AsyncSession, request: MessageRequest, user: User
 ) -> str:
+    # Check and decrement free user quota
+    quota_model, success = await free_user_quota_crud.decrement_free_user_quota(
+        session, user.id
+    )
+
+    # If quota model not found, raise error
+    if not quota_model:
+        raise NotFoundError("Free user quota not found.")
+
+    # If quota decrement successful, use system API key
+    if success:
+        return _get_default_api_key(request.llm_provider)
+
+    # Otherwise, try to use user's API key
     if request.llm_provider == LLMProviders.GOOGLE:
         if not user.gemini_api_key:
-            quota_model, success = (
-                await free_user_quota_crud.decrement_free_user_quota(
-                    session, user.id
-                )
+            raise BadRequestError(
+                "Quota exceeded and no user API key provided."
             )
-            if not quota_model:
-                raise NotFoundError("Free user quota not found.")
-            if not success:
-                raise BadRequestError("No quota is left.")
-            if not GEMINI_API_KEY:
-                raise InternalServerError(
-                    "GEMINI_API_KEY is not set in the environment variables."
-                )
-            return GEMINI_API_KEY
         return user.gemini_api_key
     else:
         raise InternalServerError(
             f"Unsupported LLM provider: {request.llm_provider}"
         )
+
+
+def _get_default_api_key(llm_provider: LLMProviders) -> str:
+    if llm_provider == LLMProviders.GOOGLE:
+        if not GEMINI_API_KEY:
+            raise InternalServerError(
+                "GEMINI_API_KEY is not set in the environment variables."
+            )
+        return GEMINI_API_KEY
+    else:
+        raise InternalServerError(f"Unsupported LLM provider: {llm_provider}")

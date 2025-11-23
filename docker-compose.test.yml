@@ -1,12 +1,18 @@
 services:
   db:
     image: postgres:16
+    container_name: backend-db-test
     env_file:
       - .env.test
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_test:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5436:5432"
+    networks:
+      - backend-network-test
 
 volumes:
-  postgres_data:
+  postgres_data_test:
+
+networks:
+  backend-network-test:

@@ -12,7 +12,7 @@ from server.constants import DEFAULT_CHAT_NAME, LLMModels, LLMProviders
 from server.crud import users_crud
 from server.middleware import NotFoundError
 from server.models.chat_models import ChatMessageRequest
-from server.models.exception_models import BadRequestError
+from server.models.exception_models import BadRequestError, ForbiddenError
 from server.models.free_user_quota_models import FreeUserQuotaRequest
 from server.models.message_models import MessageRequest, SelectedRange
 from server.models.user_models import UserRequest
@@ -113,7 +113,7 @@ async def test_get_chat_access_denied(db_session):
     await db_session.commit()
 
     # Try to access with user2
-    with pytest.raises(HTTPException) as exc_info:
+    with pytest.raises(ForbiddenError) as exc_info:
         await chat_service.get_chat(db_session, chat.id, user2)
 
     assert exc_info.value.status_code == 403
@@ -154,7 +154,7 @@ async def test_delete_chat_access_denied(db_session):
     chat = await chat_service.create_chat(db_session, user1)
     await db_session.commit()
 
-    with pytest.raises(HTTPException) as exc_info:
+    with pytest.raises(ForbiddenError) as exc_info:
         await chat_service.delete_chat(db_session, chat.id, user2)
 
     assert exc_info.value.status_code == 403
@@ -247,7 +247,7 @@ async def test_get_chat_messages_access_denied(db_session):
     chat = await chat_service.create_chat(db_session, user1)
     await db_session.commit()
 
-    with pytest.raises(HTTPException) as exc_info:
+    with pytest.raises(ForbiddenError) as exc_info:
         await chat_service.get_chat_messages(db_session, chat.id, user2)
 
     assert exc_info.value.status_code == 403

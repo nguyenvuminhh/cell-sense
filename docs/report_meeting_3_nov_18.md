@@ -1,6 +1,6 @@
 # Meeting Report - November 18, 2025
 
-## Progress Since Last Meeting:
+## Progress Since Last Meeting
 - Implemented user management and chat management with tests. This enables:
     - Saving chat messages to database.
     - Retrieving chat history for a user.

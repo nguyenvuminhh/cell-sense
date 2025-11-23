@@ -114,4 +114,4 @@ User message: "help"
 
 Generate a concise title for the following message:
 
-{{ user_message }}
+{{ decoded_message }}
