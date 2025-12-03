@@ -69,11 +69,6 @@ jobs:
         run: |
           echo "Active account:"
           gcloud config list
-          gcloud projects get-iam-policy cell-sense \
-            --flatten="bindings[].members" \
-            --format='table(bindings.role)' \
-            --filter="bindings.members:github-cicd@cell-sense.iam.gserviceaccount.com"
-
 
       - name: Run deploy
         run: make gcloud_deploy_to_cloud_run
