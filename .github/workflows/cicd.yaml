@@ -22,7 +22,11 @@ jobs:
         run: |
           python -m venv .venv
           source .venv/bin/activate
-
+      
+      - name: Install poetry
+        run: |
+          pip install poetry
+          
       - name: Install dependencies
         run: |
           make install_prod
