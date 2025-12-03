@@ -26,10 +26,10 @@ jobs:
       - name: Install poetry
         run: |
           pip install poetry
-          
+
       - name: Install dependencies
         run: |
-          make install_prod
+          make install
 
       - name: Run tests
         run: |
