@@ -7,7 +7,7 @@ install:
 
 .PHONY: install_prod
 install_prod:
-	poetry install --no-d
+	poetry install --no-dev
 
 # ----------- DOCKER -----------
 .PHONY: docker_build
