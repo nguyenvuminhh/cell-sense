@@ -68,6 +68,7 @@ jobs:
       - name: Debug show active gcloud account
         run: |
           echo "Active account:"
+          gcloud config list
           gcloud config get-value account
 
       - name: Run deploy
