@@ -65,5 +65,10 @@ jobs:
       - name: Install gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Debug show active gcloud account
+        run: |
+          echo "Active account:"
+          gcloud config get-value account
+
       - name: Run deploy
         run: make gcloud_deploy_to_cloud_run
