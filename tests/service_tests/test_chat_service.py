@@ -9,7 +9,7 @@ import pytest
 from fastapi import HTTPException
 
 from server.constants import DEFAULT_CHAT_NAME, LLMModels, LLMProviders
-from server.crud import users_crud
+from server.crud import free_user_quota_crud, users_crud
 from server.middleware import NotFoundError
 from server.models.chat_models import ChatMessageRequest
 from server.models.exception_models import BadRequestError, ForbiddenError
@@ -239,8 +239,9 @@ async def test_get_chat_messages(db_session):
 
 
 @pytest.mark.asyncio
-async def test_get_chat_messages_access_denied(db_session):
+async def test_get_chat_messages_access_denied(db_session, monkeypatch):
     """Test getting messages for a chat owned by another user raises HTTPException."""
+
     user1 = await create_test_user(db_session, "messages_user1")
     user2 = await create_test_user(db_session, "messages_user2")
 
@@ -334,6 +335,15 @@ async def test_handle_message_with_user_api_key(db_session):
     """Test handle_message with user-provided API key."""
     user = await create_test_user(db_session, "handle_message_user_key")
     chat = await chat_service.create_chat(db_session, user)
+    await free_user_quota_crud.create_free_user_quota(
+        db_session,
+        FreeUserQuotaRequest(
+            user_id=user.id,
+            free_quota_remaining=10,
+            next_reset=datetime.combine(datetime.today(), time(23, 59, 59)),
+        ),
+    )
+
     await db_session.commit()
 
     # Create a message request
@@ -524,6 +534,15 @@ async def test_handle_message_updates_chat_title(db_session):
     """Test handle_message updates chat title from default name."""
     user = await create_test_user(db_session, "update_title")
     chat = await chat_service.create_chat(db_session, user)
+    await free_user_quota_crud.create_free_user_quota(
+        db_session,
+        FreeUserQuotaRequest(
+            user_id=user.id,
+            free_quota_remaining=10,
+            next_reset=datetime.combine(datetime.today(), time(23, 59, 59)),
+        ),
+    )
+
     await db_session.commit()
 
     # Verify initial title is default

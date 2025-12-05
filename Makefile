@@ -5,10 +5,6 @@ sinclude .env
 install:
 	poetry install
 
-.PHONY: install_prod
-install_prod:
-	poetry install --no-d
-
 # ----------- DOCKER -----------
 .PHONY: docker_build
 docker_build:
@@ -52,6 +48,7 @@ gcloud_restart_cloud_run_service:
 
 .PHONY: gcloud_deploy_to_cloud_run
 gcloud_deploy_to_cloud_run:
+	gcloud auth configure-docker europe-west1-docker.pkg.dev
 	make docker_build && \
 	make gcloud_push_to_artifact_registry && \
 	make gcloud_restart_cloud_run_service
