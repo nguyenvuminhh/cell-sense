@@ -1,0 +1,3 @@
+[submodule "google_apps_script"]
+	path = google_apps_script
+	url = git@github.com:nguyenvuminhh/cell-sense-gas.git
