@@ -5,6 +5,9 @@ on:
     branches:
       - master
       - develop-workflow
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:
@@ -72,3 +75,7 @@ jobs:
 
       - name: Run deploy
         run: make gcloud_deploy_to_cloud_run
+
+      - name: Upgrade database schema
+        run: |
+          gcloud run jobs execute run-migrations --region=$GCP_REGION

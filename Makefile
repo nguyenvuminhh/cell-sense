@@ -8,7 +8,7 @@ install:
 # ----------- DOCKER -----------
 .PHONY: docker_build
 docker_build:
-	docker build -t backend .
+	docker build --platform linux/amd64 --provenance=false -t backend .
 
 .PHONY: docker_run
 docker_run:
@@ -44,14 +44,21 @@ gcloud_push_to_artifact_registry:
 gcloud_restart_cloud_run_service:
 	gcloud run services update $(GCP_CLOUD_RUN_SERVICE_NAME) \
 		--region europe-west1 \
-		--no-traffic
+		--update-env-vars RANDOM=random
+
+.PHONY: gcloud_traffic_to_latest_revision
+gcloud_traffic_to_latest_revision:
+	gcloud run services update-traffic $(GCP_CLOUD_RUN_SERVICE_NAME) \
+		--to-latest \
+		--region europe-west1
 
 .PHONY: gcloud_deploy_to_cloud_run
 gcloud_deploy_to_cloud_run:
 	gcloud auth configure-docker europe-west1-docker.pkg.dev
 	make docker_build && \
 	make gcloud_push_to_artifact_registry && \
-	make gcloud_restart_cloud_run_service
+	make gcloud_restart_cloud_run_service && \
+	make gcloud_traffic_to_latest_revision
 
 
 # ----------- PRE-COMMIT -----------

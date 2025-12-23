@@ -26,4 +26,4 @@ RUN make install
 
 EXPOSE 8080
 # Only run the app when the container starts
-CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["poetry", "run", "uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "8080"]
