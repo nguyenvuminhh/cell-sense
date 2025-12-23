@@ -1,0 +1,1 @@
+AI assistant that generates Google Sheets formulas from natural language.

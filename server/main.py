@@ -1,20 +1,27 @@
-from fastapi import FastAPI
+from typing import Annotated
+from fastapi import Depends, FastAPI
+from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from server.constants import LLMModels, LLMProviders
 from server.middleware import (
     handle_http_exceptions,
     log_request_body,
     remove_trailing_slash,
-    verify_signature_from_apps_script,
+    verify_google_identity_token,
     verify_timestamps,
 )
 from server.routers import chat_router, error_router, user_router
+from server.utils import get_database_async_session
 
 app = FastAPI(redirect_slashes=False)
 
+@app.get("/healthz")
+def healthz():
+    return "good"
+
 # ------------------------- Middleware -------------------------
 app.middleware("http")(verify_timestamps)
-app.middleware("http")(verify_signature_from_apps_script)
+app.middleware("http")(verify_google_identity_token)
 app.middleware("http")(handle_http_exceptions)
 app.middleware("http")(remove_trailing_slash)
 app.middleware("http")(log_request_body)
@@ -30,6 +37,12 @@ def ping():
 def get_root():
     return "Hi"
 
+@app.get("/db")
+def get_db(session: Annotated[AsyncSession, Depends(get_database_async_session)]):
+    if session:
+        return "Database connection successful"
+    else:
+        return "Database connection failed"
 
 @app.get(
     "/supported-models", response_model=list[tuple[LLMProviders, LLMModels]]
