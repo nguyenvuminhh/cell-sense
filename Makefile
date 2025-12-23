@@ -43,7 +43,8 @@ gcloud_push_to_artifact_registry:
 .PHONY: gcloud_restart_cloud_run_service
 gcloud_restart_cloud_run_service:
 	gcloud run services update $(GCP_CLOUD_RUN_SERVICE_NAME) \
-		--region europe-west1
+		--region europe-west1 \
+		--update-env-vars RANDOM=random
 
 .PHONY: gcloud_traffic_to_latest_revision
 gcloud_traffic_to_latest_revision:
