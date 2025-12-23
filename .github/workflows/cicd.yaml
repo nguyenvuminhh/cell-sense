@@ -78,5 +78,4 @@ jobs:
 
       - name: Upgrade database schema
         run: |
-          gcloud run jobs execute run-migrations \
-            --region=$GCP_REGION
+          gcloud run jobs execute run-migrations --region=$GCP_REGION
