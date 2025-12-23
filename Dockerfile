@@ -19,11 +19,11 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry install --no-root --no-interaction --no-ansi
 
 # Now copy the rest of your app code (this breaks cache only when code changes)
-COPY . .
+COPY . . 
 
 # Build and run app (custom make targets)
 RUN make install
 
 EXPOSE 8080
 # Only run the app when the container starts
-CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["poetry", "run", "uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "8080"]
