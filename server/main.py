@@ -1,4 +1,5 @@
 from typing import Annotated
+
 from fastapi import Depends, FastAPI
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
@@ -15,9 +16,11 @@ from server.utils import get_database_async_session
 
 app = FastAPI(redirect_slashes=False)
 
+
 @app.get("/healthz")
 def healthz():
     return "good"
+
 
 # ------------------------- Middleware -------------------------
 app.middleware("http")(verify_timestamps)
@@ -37,12 +40,16 @@ def ping():
 def get_root():
     return "Hi"
 
+
 @app.get("/db")
-def get_db(session: Annotated[AsyncSession, Depends(get_database_async_session)]):
+def get_db(
+    session: Annotated[AsyncSession, Depends(get_database_async_session)]
+):
     if session:
         return "Database connection successful"
     else:
         return "Database connection failed"
+
 
 @app.get(
     "/supported-models", response_model=list[tuple[LLMProviders, LLMModels]]
