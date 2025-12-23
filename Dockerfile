@@ -19,7 +19,7 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry install --no-root --no-interaction --no-ansi
 
 # Now copy the rest of your app code (this breaks cache only when code changes)
-COPY . . 
+COPY . .
 
 # Build and run app (custom make targets)
 RUN make install
