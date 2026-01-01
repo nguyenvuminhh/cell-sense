@@ -11,19 +11,19 @@ Cell-Sense is an AI productivity tool designed to enhance Google Sheets with int
 The frontend runs as a Google Apps Script extension, built with HTML and JavaScript, and is embedded directly into Google Sheets. The backend is hosted on Google Cloud Platform (GCP) and acts as a secure API layer that connects the Sheets UI to multiple large language models.
 
 ## 🤖 AI Model Support
-	•	Gemini — currently integrated and in active development
-	•	ChatGPT — planned
-	•	Claude — planned
+- Gemini — currently integrated and in active development
+- ChatGPT — planned
+- Claude — planned
 
 The backend is designed to be model-agnostic, allowing flexible switching or expansion across AI providers.
 
 ## ✨ Features
-	•	🧠 Natural-language assistance inside Google Sheets
-	•	🧮 Formula generation and explanation
-	•	📊 Data analysis, summaries, and insights
-	•	⚙️ Spreadsheet workflow automation support
-	•	🤖 Multi-LLM backend architecture
-	•	☁️ Secure, scalable backend hosted on GCP
+- 🧠 Natural-language assistance inside Google Sheets
+- 🧮 Formula generation and explanation
+- 📊 Data analysis, summaries, and insights
+- ⚙️ Spreadsheet workflow automation support
+- 🤖 Multi-LLM backend architecture
+- ☁️ Secure, scalable backend hosted on GCP
 
 ## 🧩 Architecture
 
@@ -40,11 +40,8 @@ Google Sheets
     └── Claude (TBD)
 
 ## 🛠 Tech Stack
-	•	Frontend: Google Apps Script (HTML + JavaScript)
-	•	Backend: Python-based API (hosted on GCP)
-	•	AI Services: Gemini, ChatGPT (TBD), Claude (TBD)
-	•	Cloud Platform: Google Cloud Platform
+- Frontend: Google Apps Script (HTML + JavaScript)
+- Backend: Python-based API (hosted on GCP)
+- AI Services: Gemini, ChatGPT (TBD), Claude (TBD)
+- Cloud Platform: Google Cloud Platform
 
-## 🔒 Security
-	•	No API keys are exposed in client-side Apps Script
-	•	All AI requests are handled through the backend API
