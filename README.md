@@ -26,7 +26,7 @@ The backend is designed to be model-agnostic, allowing flexible switching or exp
 - ☁️ Secure, scalable backend hosted on GCP
 
 ## 🧩 Architecture
-
+```
 Google Sheets
 (HTML + JS via Apps Script)
         │
@@ -38,10 +38,11 @@ Google Sheets
     ├── Gemini
     ├── ChatGPT (TBD)
     └── Claude (TBD)
-
+```
 ## 🛠 Tech Stack
 - Frontend: Google Apps Script (HTML + JavaScript)
 - Backend: Python-based API (hosted on GCP)
 - AI Services: Gemini, ChatGPT (TBD), Claude (TBD)
 - Cloud Platform: Google Cloud Platform
+
 
