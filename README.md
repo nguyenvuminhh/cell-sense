@@ -45,4 +45,7 @@ Google Sheets
 - AI Services: Gemini, ChatGPT (TBD), Claude (TBD)
 - Cloud Platform: Google Cloud Platform
 
+## 🧪 Test Instance
+
+Testing instance is available at https://docs.google.com/spreadsheets/d/13uBCmtwEhp2BgL4xUM2KJt6KaRRpQXA5cPOytErKHkw/edit?usp=drivesdk. As the project is still under development (TBD), please grant all requested permissions when prompted. For your assurance and to avoid affecting existing data or settings, it is recommended to use a brand-new Google account when accessing the testing instance.
 
