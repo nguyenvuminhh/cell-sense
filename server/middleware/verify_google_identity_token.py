@@ -34,6 +34,7 @@ async def verify_google_identity_token(request: Request, call_next):
             token,
             requests.Request(),
             audience=GOOGLE_OAUTH_CLIENT_ID,
+            clock_skew_in_seconds=10,
         )
 
         # Store user info in request state for downstream handlers

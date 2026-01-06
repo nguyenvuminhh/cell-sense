@@ -25,6 +25,8 @@ dependencies = [
     "google-auth (>=2.43.0,<3.0.0)",
     "psycopg2-binary (>=2.9.11,<3.0.0)",
     "openai (>=2.14.0,<3.0.0)",
+    "anthropic (>=0.75.0,<0.76.0)",
+    "greenlet (>=3.3.0,<4.0.0)",
 ]
 
 

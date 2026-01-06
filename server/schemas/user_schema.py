@@ -15,6 +15,8 @@ class UserSchema(BaseSchema):
 
     email: Mapped[str] = mapped_column(nullable=False)
     gemini_api_key: Mapped[str] = mapped_column(nullable=True)
+    chatgpt_api_key: Mapped[str] = mapped_column(nullable=True)
+    claude_api_key: Mapped[str] = mapped_column(nullable=True)
 
     # Relationships
     chats: Mapped[list["ChatSchema"]] = relationship(

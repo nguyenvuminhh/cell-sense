@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends, FastAPI
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
-from server.constants import LLMModels, LLMProviders
+from server.constants import LLM_PROVIDERS_TO_MODELS, LLMModels, LLMProviders
 from server.middleware import (
     handle_http_exceptions,
     log_request_body,
@@ -52,17 +52,11 @@ def get_db(
 
 
 @app.get(
-    "/supported-models", response_model=list[tuple[LLMProviders, LLMModels]]
+    "/supported-models", response_model=dict[LLMProviders, list[LLMModels]]
 )
-def get_supported_models() -> list[tuple[LLMProviders, LLMModels]]:
-
-    gemini_models = [
-        LLMModels.GOOGLE_GEMINI_2_5_FLASH,
-        LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE,
-        LLMModels.GOOGLE_GEMINI_2_5_PRO,
-    ]
-    result = [(LLMProviders.GOOGLE, model) for model in gemini_models]
-    return result
+def get_supported_models() -> dict[LLMProviders, list[LLMModels]]:
+    print(LLM_PROVIDERS_TO_MODELS)
+    return LLM_PROVIDERS_TO_MODELS
 
 
 # ------------------------- Routers -------------------------

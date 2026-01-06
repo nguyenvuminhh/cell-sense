@@ -3,12 +3,7 @@ from typing import Any, List
 
 from pydantic import BaseModel, computed_field
 
-from server.constants import (
-    ChatGPTHistoryRoles,
-    GeminiHistoryRoles,
-    LLMModels,
-    LLMProviders,
-)
+from server.constants import ChatRoles, LLMModels, LLMProviders
 from server.utils import extract_sheet_name_and_range, extract_target_cell
 
 
@@ -76,17 +71,22 @@ class TitleNamingResponse(BaseModel):
     message_is_unclear: bool
 
 
-# ----- Gemini History Models -----
+# ----- History Models -----
+class HistoryEntryBase(BaseModel):
+    role: ChatRoles
+
+
 class GeminiHistoryPart(BaseModel):
     text: str
 
 
-class GeminiHistoryEntry(BaseModel):
-    role: GeminiHistoryRoles
+class GeminiHistoryEntry(HistoryEntryBase):
     parts: list[GeminiHistoryPart]
 
 
-# ----- ChatGPT History Models -----
-class ChatGPTHistoryEntry(BaseModel):
-    role: ChatGPTHistoryRoles
+class ChatGPTHistoryEntry(HistoryEntryBase):
     content: str
+
+
+class ClaudeHistoryEntry(ChatGPTHistoryEntry):
+    pass

@@ -17,6 +17,7 @@ class JinjaPromptTemplatesNames(StrEnum):
 class LLMProviders(StrEnum):
     GOOGLE = "google"
     OPENAI = "openai"
+    ANTHROPIC = "anthropic"
 
 
 class LLMModels(StrEnum):
@@ -29,28 +30,33 @@ class LLMModels(StrEnum):
     OPENAI_GPT_5_MINI = "gpt-5-mini"
     OPENAI_GPT_5_NANO = "gpt-5-nano"
 
+    ANTHROPIC_CLAUDE_HAIKU_4_5 = "claude-haiku-4-5"
+    ANTHROPIC_CLAUDE_SONNET_4_5 = "claude-sonnet-4-5"
+    ANTHROPIC_CLAUDE_OPUS_4_5 = "claude-opus-4-5"
 
-LLMProvidersToModels = {
-    LLMProviders.GOOGLE: [
-        LLMModels.GOOGLE_GEMINI_2_5_FLASH,
-        LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE,
-        LLMModels.GOOGLE_GEMINI_2_5_PRO,
-    ],
+
+LLM_PROVIDERS_TO_MODELS = {
     LLMProviders.OPENAI: [
-        LLMModels.OPENAI_GPT_5,
         LLMModels.OPENAI_GPT_5_PRO,
+        LLMModels.OPENAI_GPT_5,
         LLMModels.OPENAI_GPT_5_MINI,
         LLMModels.OPENAI_GPT_5_NANO,
+    ],
+    LLMProviders.ANTHROPIC: [
+        LLMModels.ANTHROPIC_CLAUDE_OPUS_4_5,
+        LLMModels.ANTHROPIC_CLAUDE_SONNET_4_5,
+        LLMModels.ANTHROPIC_CLAUDE_HAIKU_4_5,
+    ],
+    LLMProviders.GOOGLE: [
+        LLMModels.GOOGLE_GEMINI_2_5_PRO,
+        LLMModels.GOOGLE_GEMINI_2_5_FLASH,
+        LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE,
     ],
 }
 
 
-class GeminiHistoryRoles(StrEnum):
-    USER = "user"
+class ChatRoles(StrEnum):
     MODEL = "model"
-
-
-class ChatGPTHistoryRoles(StrEnum):
     USER = "user"
     ASSISTANT = "assistant"
     DEVELOPER = "developer"
