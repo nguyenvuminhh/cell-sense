@@ -13,6 +13,10 @@ async def update_api_key(
     updated_user_model = user
     if request.gemini_api_key is not None:
         updated_user_model.gemini_api_key = request.gemini_api_key
+    if request.chatgpt_api_key is not None:
+        updated_user_model.chatgpt_api_key = request.chatgpt_api_key
+    if request.claude_api_key is not None:
+        updated_user_model.claude_api_key = request.claude_api_key
 
     result = await users_crud.update_user(session, user.id, updated_user_model)
     if not result:

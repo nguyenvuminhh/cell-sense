@@ -49,9 +49,15 @@ async def handle_message(
         api_key=await _get_api_key(session, request, user),
         chat_id=chat_id,
     )
-    response_model = MessageResponse.model_validate_json(
-        prompt_and_response.full_model_response
-    )
+    try:
+        response_model = MessageResponse.model_validate_json(
+            prompt_and_response.full_model_response
+        )
+    except Exception:
+        raise InternalServerError(
+            "Failed to parse LLM response into MessageResponse model."
+        )
+
     user_message_request = ChatMessageRequest(
         chat_id=chat_id,
         content=request.decoded_message,
@@ -159,14 +165,21 @@ async def _get_chat_title(
 
     # Use the best model for title naming
     system_api_key = GEMINI_API_KEY
-    message.llm_model = LLMModels.GOOGLE_GEMINI_2_5_PRO
     if not system_api_key:
         raise InternalServerError(
             "GEMINI_API_KEY is not set in the environment variables."
         )
+
+    message_request_for_title = MessageRequest(
+        message=message.message,
+        selected_ranges=message.selected_ranges,
+        llm_provider=LLMProviders.GOOGLE,
+        llm_model=LLMModels.GOOGLE_GEMINI_2_5_PRO,
+    )
+
     prompt_and_response = await llm_service.generate_response(
         session=session,
-        message_request=message,
+        message_request=message_request_for_title,
         template_name=JinjaPromptTemplatesNames.LLM_TITLE_NAMING_PROMPT,
         response_schema=TitleNamingResponse,
         api_key=system_api_key,
@@ -186,18 +199,22 @@ async def _get_chat_title(
 async def _get_api_key(
     session: AsyncSession, request: MessageRequest, user: User
 ) -> str:
-    # Check and decrement free user quota
-    quota_model, success = await free_user_quota_crud.decrement_free_user_quota(
-        session, user.id
-    )
+    # Check if user choose Gemini as LLM provider (only provider with free quota)
+    if request.llm_provider == LLMProviders.GOOGLE:
+        # Check and decrement free user quota
+        quota_model, success = (
+            await free_user_quota_crud.decrement_free_user_quota(
+                session, user.id
+            )
+        )
 
-    # If quota model not found, raise error
-    if not quota_model:
-        raise NotFoundError("Free user quota not found.")
+        # If quota model not found, raise error
+        if not quota_model:
+            raise NotFoundError("Free user quota not found.")
 
-    # If quota decrement successful, use system API key
-    if success:
-        return _get_default_api_key(request.llm_provider)
+        # If quota decrement successful, use system API key
+        if success:
+            return _get_default_api_key(request.llm_provider)
 
     # Otherwise, try to use user's API key
     if request.llm_provider == LLMProviders.GOOGLE:
@@ -206,6 +223,18 @@ async def _get_api_key(
                 "Quota exceeded and no user API key provided."
             )
         return user.gemini_api_key
+    elif request.llm_provider == LLMProviders.OPENAI:
+        if not user.chatgpt_api_key:
+            raise BadRequestError(
+                "No OpenAI API key provided. Note that only Gemini has free quota."
+            )
+        return user.chatgpt_api_key
+    elif request.llm_provider == LLMProviders.ANTHROPIC:
+        if not user.claude_api_key:
+            raise BadRequestError(
+                "No Anthropic API key provided. Note that only Gemini has free quota."
+            )
+        return user.claude_api_key
     else:
         raise InternalServerError(
             f"Unsupported LLM provider: {request.llm_provider}"
