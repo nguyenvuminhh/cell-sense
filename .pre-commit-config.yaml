@@ -43,6 +43,7 @@ repos:
     rev: v1.4.0
     hooks:
       - id: detect-secrets
+        args: ["--exclude-files", "(^|/)(alembic/|tests/)|\\.env\\.(test|example)$"]
 
   # --- Code formatter ---
   - repo: https://github.com/psf/black
