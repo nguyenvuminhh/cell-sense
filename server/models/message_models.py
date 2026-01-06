@@ -3,7 +3,12 @@ from typing import Any, List
 
 from pydantic import BaseModel, computed_field
 
-from server.constants import GeminiHistoryRoles, LLMModels, LLMProviders
+from server.constants import (
+    ChatGPTHistoryRoles,
+    GeminiHistoryRoles,
+    LLMModels,
+    LLMProviders,
+)
 from server.utils import extract_sheet_name_and_range, extract_target_cell
 
 
@@ -79,3 +84,9 @@ class GeminiHistoryPart(BaseModel):
 class GeminiHistoryEntry(BaseModel):
     role: GeminiHistoryRoles
     parts: list[GeminiHistoryPart]
+
+
+# ----- ChatGPT History Models -----
+class ChatGPTHistoryEntry(BaseModel):
+    role: ChatGPTHistoryRoles
+    content: str

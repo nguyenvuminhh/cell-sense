@@ -1,24 +1,10 @@
 from google import genai
-
-from server.constants import LLMModels, LLMProviders, LLMProvidersToModels
-from server.models.exception_models import InternalServerError
+from openai import OpenAI
 
 
-def get_llm_client(
-    llm_provider: LLMProviders, llm_model: LLMModels, api_key: str
-) -> genai.Client:
-    if llm_model not in LLMProvidersToModels[llm_provider]:
-        raise InternalServerError(
-            f"Model {llm_model} is not supported by provider {llm_provider}."
-        )
+def get_google_gemini_client(api_key: str) -> genai.Client:
+    return genai.Client(api_key=api_key)
 
-    if llm_provider == LLMProviders.GOOGLE:
-        if not api_key:
-            raise InternalServerError(
-                "GEMINI_API_KEY is not set in the environment variables."
-            )
-        return genai.Client(api_key=api_key)
-    else:
-        raise InternalServerError(
-            f"LLM provider {llm_provider} is not supported."
-        )
+
+def get_openai_chatgpt_client(api_key: str) -> OpenAI:
+    return OpenAI(api_key=api_key)

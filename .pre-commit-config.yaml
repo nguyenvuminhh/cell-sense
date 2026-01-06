@@ -38,6 +38,12 @@ repos:
         args: ["-ll"]
         files: \.py$
 
+  # --- Secret detection ---
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+
   # --- Code formatter ---
   - repo: https://github.com/psf/black
     rev: 24.4.2

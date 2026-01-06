@@ -49,9 +49,15 @@ async def handle_message(
         api_key=await _get_api_key(session, request, user),
         chat_id=chat_id,
     )
-    response_model = MessageResponse.model_validate_json(
-        prompt_and_response.full_model_response
-    )
+    try:
+        response_model = MessageResponse.model_validate_json(
+            prompt_and_response.full_model_response
+        )
+    except Exception:
+        raise InternalServerError(
+            "Failed to parse LLM response into MessageResponse model."
+        )
+
     user_message_request = ChatMessageRequest(
         chat_id=chat_id,
         content=request.decoded_message,
