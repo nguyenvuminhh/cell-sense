@@ -4,6 +4,7 @@
 - Deploy to production environment on Google Cloud Platform (GCP).
 - Implement CI/CD pipelines for automated testing and deployment.
 - Integrate additional LLM providers: OpenAI ChatGPT, Anthropic Claude.
+- Polishing the frontend: Allow user to revert changes suggested by the AI assistant and add loading effects.
 
 ## Deployment to Production on GCP
 - The backend FastAPI server is now deployed to a production environment on Google Cloud Platform (GCP).
@@ -46,6 +47,13 @@
     - Anthropic Claude: "claude-haiku-4-5",
     "claude-sonnet-4-5", "claude-opus-4-5"
 
+## Frontend Polishing
+- Users can now revert changes suggested by the AI assistant. Each suggested change has a "Revert" button next to it. Clicking the button will undo that specific change. Note that you can revert changes from any previous messages in the chat history (not just the latest one).
+![alt text](./assets/5_allow_revert.png)
+- Added loading effects when waiting for LLM response. A small bubble with a message (e.g., "Generating response...") is displayed in the chat area while waiting for the LLM response.
+- The message is chosen randomly from a set of predefined messages to make it less repetitive.
+- The dots is animated to indicate that the system is processing the request.
+![alt text](./assets/5_loading_effect.png)
 ## Comparison between using Google Cloud Run vs Google Compute Engine for backend deployment
 ### Google Cloud Run (Current Approach)
 #### Pros:
@@ -89,3 +97,5 @@
 - Users may have concerns about data privacy since they are using a shared document.
 - Less discoverable since users need to have the document link to access the add-on.
 - Users see Google's warning about using add-ons from unverified developers when they open the document.
+
+![alt text](./assets/5_google_warning.png)
