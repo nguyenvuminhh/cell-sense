@@ -24,3 +24,7 @@ MAX_TIMESTAMP_DIFF_SECONDS = 60  # 1 minute
 SKIP_AUTH_PATHS = ["/ping", "/error/", "/docs", "/openapi.json", "/db"]
 FREE_USER_DAILY_QUOTA = 10
 CONTEXT_WINDOW_SIZE = 30  # Number of messages to consider for context in chat
+SYSTEM_API_KEY_DAILY_LIMIT = 150  # Max uses of system Gemini API key per day
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
