@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
+from server import config
 from server.config import GEMINI_API_KEY
 from server.constants import (
     DEFAULT_CHAT_NAME,
@@ -8,7 +9,11 @@ from server.constants import (
     LLMModels,
     LLMProviders,
 )
-from server.crud import chats_crud, free_user_quota_crud
+from server.crud import (
+    chats_crud,
+    free_user_quota_crud,
+    system_api_key_usage_crud,
+)
 from server.middleware import NotFoundError
 from server.models.chat_models import Chat, ChatMessage, ChatMessageRequest
 from server.models.exception_models import (
@@ -23,6 +28,7 @@ from server.models.message_models import (
 )
 from server.models.user_models import User
 from server.services import llm_service
+from server.utils import send_telegram_message
 
 
 async def handle_message(
@@ -214,6 +220,20 @@ async def _get_api_key(
 
         # If quota decrement successful, use system API key
         if success:
+            # Check and increment system API key usage
+            usage_model, usage_success = (
+                await system_api_key_usage_crud.increment_usage(session)
+            )
+            if not usage_success:
+                send_telegram_message("System API key daily limit exceeded.")
+                raise BadRequestError(
+                    "System API key daily limit exceeded. Please try again tomorrow."
+                )
+            else:
+                send_telegram_message(
+                    f"Today is {usage_model.date}. System API key used. Today's usage: {usage_model.count}/{config.SYSTEM_API_KEY_DAILY_LIMIT}"
+                )
+
             return _get_default_api_key(request.llm_provider)
 
     # Otherwise, try to use user's API key
