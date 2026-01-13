@@ -5,6 +5,7 @@
 - Implement CI/CD pipelines for automated testing and deployment.
 - Integrate additional LLM providers: OpenAI ChatGPT, Anthropic Claude.
 - Polishing the frontend: Allow user to revert changes suggested by the AI assistant and add loading effects.
+- Build a API key usage tracker and a telegram bot to monitor API key usage.
 
 ## Deployment to Production on GCP
 - The backend FastAPI server is now deployed to a production environment on Google Cloud Platform (GCP).
@@ -54,6 +55,16 @@
 - The message is chosen randomly from a set of predefined messages to make it less repetitive.
 - The dots is animated to indicate that the system is processing the request.
 ![alt text](./assets/5_loading_effect.png)
+
+## API Key Usage Tracker and Telegram Bot
+- Since the Google Sheets containing the add-on is shared publicly, it is important to monitor the usage of the system's API keys to prevent abuse.
+- An API key usage tracker is implemented in the backend to log each request made using the system's API keys.
+- There is a limit of 150 requests per day for the system's API keys. If the limit is reached, the API key will be temporarily disabled until the next day.
+- A Telegram bot is created to monitor the API key usage. The bot sends a message to me on Telegram whenever:
+    - A request is made using the system's API key.
+    - The daily limit of 150 requests is reached and the API key is disabled.
+![alt text](./assets/5_telegram_bot_tracker.png)
+
 ## Comparison between using Google Cloud Run vs Google Compute Engine for backend deployment
 ### Google Cloud Run (Current Approach)
 #### Pros:
@@ -86,7 +97,6 @@
 - Users have less concern about data privacy since the add-on is installed in their own documents.
 - Users don't see Google's warning about using add-ons from unverified developers when installing from the marketplace.
 #### Cons:
-- The add-on will be available to all Google Sheets users via the Google Workspace Marketplace.
 - Requires going through Google's review process, which can take a long time. The procedures are also very complicated, including preparing documents (Terms of Service, Privacy Policy, etc.), designing icons and images, setting up developer profile page (my own profile), etc.
 
 ### Sharing a Google Sheets Document with the Add-on Installed (Current Approach)
