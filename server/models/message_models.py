@@ -52,7 +52,7 @@ class MessageRequest(BaseModel):
 class FilledRange(BaseModel):
     sheet_name: str
     range: str
-    r1c1_value: str
+    a1_value: str
 
 
 class MessageResponse(BaseModel):
