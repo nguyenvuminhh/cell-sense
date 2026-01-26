@@ -1,0 +1,155 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\"),E2:E11,F2:F11)",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11*F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIFS(E2:E11,C2:C11,\"Product B\")"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "K2": "=SUMIFS(E2:E11, B2:B11, \"Acme Corp\", C2:C11, \"Product A\") * SUMIFS(F2:F11, B2:B11, \"Acme Corp\", C2:C11, \"Product A\")",
+      "K3": "=COUNTIFS(D2:D11, \"North\", G2:G11, \"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11, \"Product B\", E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMIFS(M2_Order_Analysis!E2:E11, M2_Order_Analysis!B2:B11, \"Acme Corp\", M2_Order_Analysis!C2:C11, \"Product A\") * AVERAGE(M2_Order_Analysis!F2:F11)",
+      "K3": "=COUNTIFS(M2_Order_Analysis!D2:D11, \"North\", M2_Order_Analysis!G2:G11, \"Completed\")",
+      "K4": "=AVERAGEIF(M2_Order_Analysis!C2:C11, \"Product B\", M2_Order_Analysis!E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMIFS(A2:A11, B2:B11, \"Acme Corp\", C2:C11, \"Product A\", E2:E11, \"*\", F2:F11, \"*\")*(SUMIFS(E2:E11, B2:B11, \"Acme Corp\", C2:C11, \"Product A\"))",
+      "K3": "=COUNTIFS(D2:D11, \"North\", G2:G11, \"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11, \"Product B\", E2:E11)"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "K2": "=SUMPRODUCT(--(B2:B11=\"Acme Corp\"),--(C2:C11=\"Product A\"),E2:E11,F2:F11)",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*E2:E11*F2:F11)",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*E2:E11*F2:F11)",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*E2:E11*F2:F11)",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*E2:E11*F2:F11)",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=SUMPRODUCT((D2:D11=\"North\")*(G2:G11=\"Completed\"))",
+      "K4": "=AVERAGEIFS(E2:E11, C2:C11, \"Product B\")"
+    },
+    "third": {
+      "K2": "=SUMPRODUCT((B2:B11=\\\"Acme Corp\\\")*(C2:C11=\\\"Product A\\\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\\\"North\\\",G2:G11,\\\"Completed\\\")",
+      "K4": "=AVERAGEIF(C2:C11,\\\"Product B\\\",E2:E11)"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMIFS($F$2:$F$11, $B$2:$B$11, \"Acme Corp\", $C$2:$C$11, \"Product A\", $E$2:$E$11, $F$2:$F$11)",
+      "K3": "=COUNTIFS($D$2:$D$11, \"North\", $G$2:$G$11, \"Completed\")",
+      "K4": "=AVERAGEIF($C$2:$C$11, \"Product B\", $E$2:$E$11)"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMIFS(E:E*F:F,B:B,\"Acme Corp\",C:C,\"Product A\")",
+      "K3": "=COUNTIFS(D:D,\"North\",G:G,\"Completed\")",
+      "K4": "=AVERAGEIF(C:C,\"Product B\",E:E)"
+    },
+    "third": {
+      "K2": "=SUMIFS(E:E*F:F,B:B,\"Acme Corp\",C:C,\"Product A\")",
+      "K3": "=COUNTIFS(D:D,\"North\",G:G,\"Completed\")",
+      "K4": "=AVERAGEIF(C:C,\"Product B\",E:E)"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "second": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    },
+    "third": {
+      "K2": "=SUMPRODUCT((B2:B11=\"Acme Corp\")*(C2:C11=\"Product A\")*(E2:E11)*(F2:F11))",
+      "K3": "=COUNTIFS(D2:D11,\"North\",G2:G11,\"Completed\")",
+      "K4": "=AVERAGEIF(C2:C11,\"Product B\",E2:E11)"
+    }
+  }
+}

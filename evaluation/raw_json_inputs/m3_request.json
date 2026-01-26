@@ -1,0 +1,102 @@
+{
+    "message": "This is a project tracking table: <cells>'M3_Date_Calculations'!A1:H7</cells>. Column B has start date, column C has end date, column D has budget, column E has actual cost. Please calculate: (1) Project duration in days (end date - start date). (2) Cost per day (actual cost / duration). (3) Budget status: \"Under Budget\" if actual < budget, \"Over Budget\" if actual > budget, \"On Budget\" if equal. Write duration here: <target>'M3_Date_Calculations'!F2:F7</target>. Write cost per day here: <target>'M3_Date_Calculations'!G2:G7</target>. Write budget status here: <target>'M3_Date_Calculations'!H2:H7</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'M3_Date_Calculations'!A1:H7",
+            "cell_values": [
+                [
+                    "Project",
+                    "Start Date",
+                    "End Date",
+                    "Budget",
+                    "Actual Cost",
+                    "Duration (Days)",
+                    "Cost per Day",
+                    "Budget Status"
+                ],
+                [
+                    "Website Redesign",
+                    "2024-01-15",
+                    "2024-03-15",
+                    50000,
+                    48000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Mobile App",
+                    "2024-02-01",
+                    "2024-06-30",
+                    120000,
+                    135000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Data Migration",
+                    "2024-01-20",
+                    "2024-02-20",
+                    35000,
+                    32000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "CRM Integration",
+                    "2024-03-01",
+                    "2024-05-31",
+                    75000,
+                    75000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Security Audit",
+                    "2024-02-15",
+                    "2024-03-31",
+                    25000,
+                    28000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "API Development",
+                    "2024-04-01",
+                    "2024-07-31",
+                    90000,
+                    82000,
+                    "",
+                    "",
+                    ""
+                ]
+            ],
+            "sheet_name": "M3_Date_Calculations",
+            "range": "A1:H7"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is a project tracking table: <cells>'M3_Date_Calculations'!A1:H7</cells>. Column B has start date, column C has end date, column D has budget, column E has actual cost. Please calculate: (1) Project duration in days (end date - start date). (2) Cost per day (actual cost / duration). (3) Budget status: \"Under Budget\" if actual < budget, \"Over Budget\" if actual > budget, \"On Budget\" if equal. Write duration here: <target>'M3_Date_Calculations'!F2:F7</target>. Write cost per day here: <target>'M3_Date_Calculations'!G2:G7</target>. Write budget status here: <target>'M3_Date_Calculations'!H2:H7</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'M3_Date_Calculations'!F2:F7",
+            "sheet_name": "M3_Date_Calculations",
+            "range": "F2:F7"
+        },
+        {
+            "sheet_name_and_range": "'M3_Date_Calculations'!G2:G7",
+            "sheet_name": "M3_Date_Calculations",
+            "range": "G2:G7"
+        },
+        {
+            "sheet_name_and_range": "'M3_Date_Calculations'!H2:H7",
+            "sheet_name": "M3_Date_Calculations",
+            "range": "H2:H7"
+        }
+    ]
+}

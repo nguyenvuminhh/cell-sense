@@ -1,0 +1,215 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=E2/B2",
+      "H2:H13": "=IF(A2=\"Jan\",\"N/A\",(B2-B1)/B1)",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "\"N/A\"",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2": "=B2",
+      "I3:I13": "=I2+B3"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=E2/B2",
+      "H2": "N/A",
+      "H3:H13": "=(B3-B2)/B2",
+      "I2:I13": "=SUM($B$2:B2)"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=IF(B2=0, 0, (E2/B2)*100)",
+      "H2:H13": "=IF(ROW(H2)=2, \"N/A\", (B2-B1)/B1)",
+      "I2:I13": "=SUM(B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=IF(B2=0, 0, E2/B2)",
+      "H2:H13": "=IF(ROW()=2, \"N/A\", (B2-B1)/B1)",
+      "I2:I13": "=SUM(B$2:B2)"
+    },
+    "third": {
+      "E2:E13": "=SUM(B2-C2)",
+      "F2:F13": "=SUM(E2-D2)",
+      "G2:G13": "=IF(B2=0, \"N/A\", (E2/B2)*100)",
+      "H2:H13": "=IF(ROW(A1)=1, \"N/A\", (B2-B1)/B1)",
+      "I2:I13": "=SUM(B$2:B2)"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=E2/B2",
+      "H2:H13": "=IFERROR((B2-B1)/B1, \"N/A\")",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=E2/B2",
+      "H2": "N/A",
+      "H3:H13": "=(B3-B2)/B2",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=E2/B2",
+      "H2": "N/A",
+      "H3:H13": "=(B3-B2)/B2",
+      "I2:I13": "=SUM($B$2:B2)"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "'H1_Financial_Analysis'!E2:E13": "=B2-C2",
+      "'H1_Financial_Analysis'!F2:F13": "=E2-D2",
+      "'H1_Financial_Analysis'!G2:G13": "=(E2/B2)*100",
+      "'H1_Financial_Analysis'!H2": "N/A",
+      "'H1_Financial_Analysis'!H3:H13": "=((B3-B2)/B2)*100",
+      "'H1_Financial_Analysis'!I2:I13": "=SUM($B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "N/A",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2:H13": "=IF(ROW()=2, \"N/A\", ((B2-B1)/B1)*100)",
+      "I2:I13": "=SUM($B$2:B2)"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=IF(B2=0,\"\",E2/B2*100)",
+      "H2:H13": "=IF(ROW()=2,\"N/A\",IF(NOT(ISNUMBER(B1)),\"N/A\",(B2-B1)/B1*100))",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=B2-C2-D2",
+      "G2:G13": "=IF(B2=0,\"\",(E2/B2)*100)",
+      "H2:H13": "=IF(ROW()=2,\"N/A\",(B2-B1)/B1*100)",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=IF(B2=0,\"\",E2/B2*100)",
+      "H2": "N/A",
+      "H3:H13": "=(B3-B2)/B2*100",
+      "I2:I13": "=SUM($B$2:B2)"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "E2:E13": "=B2 - C2",
+      "F2:F13": "=B2 - C2 - D2",
+      "G2:G13": "=(E2 / B2) * 100",
+      "H2:H13": "=IF(ROW()=2, \"N/A\", (B2 - B1)/B1 * 100)",
+      "I2:I13": "=IF(ROW()=2, B2, I1 + B2)"
+    },
+    "second": {
+      "E2:E13": "=B2:B13 - C2:C13",
+      "F2:F13": "=(B2:B13 - C2:C13) - D2:D13",
+      "G2:G13": "=(B2:B13 - C2:C13) / B2:B13 * 100",
+      "H2:H13": "=IF(ROW(B2:B13)=ROW(B2), \"N/A\", (B2:B13 - OFFSET(B2:B13, -1, 0)) / OFFSET(B2:B13, -1, 0) * 100)",
+      "I2:I13": "=SCAN(0, B2:B13, LAMBDA(acc, val, acc + val))"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=IF(B2=0, 0, E2/B2*100)",
+      "H2": "=\"N/A\"",
+      "H3:H13": "=IF(B3=0, \"\", (B3-B2)/B2*100)",
+      "I2:I13": "=SUM($B$2:B2)"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2:H13": "=IF(ROW()=2,\"N/A\",((B2-B1)/B1)*100)",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "\"N/A\"",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2": "=B2",
+      "I3:I13": "=I2+B3"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "\"N/A\"",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2": "=B2",
+      "I3:I13": "=I2+B3"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing a value at line 1 column 2416 [type=json_invalid, input_value='{\"message\": \"Calculated ...alysis\", \"range\": \"G4\",', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    },
+    "second": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing a string at line 1 column 2420 [type=json_invalid, input_value='{\"message\": \"Calculated ...is\", \"range\": \"G4\", \"a1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    },
+    "third": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing a string at line 1 column 2437 [type=json_invalid, input_value='{\"message\": \"Calculated ...et_name\": \"H1_Financial', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "N/A",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2:I13": "=SUM($B$2:B2)"
+    },
+    "second": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "N/A",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2": "=B2",
+      "I3:I13": "=I2+B3"
+    },
+    "third": {
+      "E2:E13": "=B2-C2",
+      "F2:F13": "=E2-D2",
+      "G2:G13": "=(E2/B2)*100",
+      "H2": "N/A",
+      "H3:H13": "=((B3-B2)/B2)*100",
+      "I2": "=B2",
+      "I3:I13": "=I2+B3"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+    "message": "This is a quarterly sales revenue table: <cells>'E1_Sales_Revenue'!A1:F6</cells>. Column B-E contains quarterly revenue for each product. Please calculate the annual total revenue for each product by summing all four quarters. Write results here: <target>'E1_Sales_Revenue'!F2:F6</target>. Also calculate the grand total of all products and quarters here: <target>'E1_Sales_Revenue'!F7</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'E1_Sales_Revenue'!A1:F6",
+            "cell_values": [
+                [
+                    "Product",
+                    "Q1",
+                    "Q2",
+                    "Q3",
+                    "Q4",
+                    "Annual Total"
+                ],
+                [
+                    "Laptop",
+                    45000,
+                    52000,
+                    48000,
+                    65000,
+                    ""
+                ],
+                [
+                    "Monitor",
+                    18000,
+                    21000,
+                    19500,
+                    25000,
+                    ""
+                ],
+                [
+                    "Keyboard",
+                    5500,
+                    6200,
+                    5800,
+                    7500,
+                    ""
+                ],
+                [
+                    "Mouse",
+                    3200,
+                    3800,
+                    3500,
+                    4500,
+                    ""
+                ],
+                [
+                    "Headset",
+                    8500,
+                    9200,
+                    8800,
+                    11000,
+                    ""
+                ]
+            ],
+            "sheet_name": "E1_Sales_Revenue",
+            "range": "A1:F6"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is a quarterly sales revenue table: <cells>'E1_Sales_Revenue'!A1:F6</cells>. Column B-E contains quarterly revenue for each product. Please calculate the annual total revenue for each product by summing all four quarters. Write results here: <target>'E1_Sales_Revenue'!F2:F6</target>. Also calculate the grand total of all products and quarters here: <target>'E1_Sales_Revenue'!F7</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'E1_Sales_Revenue'!F2:F6",
+            "sheet_name": "E1_Sales_Revenue",
+            "range": "F2:F6"
+        },
+        {
+            "sheet_name_and_range": "'E1_Sales_Revenue'!F7",
+            "sheet_name": "E1_Sales_Revenue",
+            "range": "F7"
+        }
+    ]
+}

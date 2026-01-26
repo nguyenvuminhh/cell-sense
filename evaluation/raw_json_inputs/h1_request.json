@@ -1,0 +1,185 @@
+{
+    "message": "This is a monthly financial data table: <cells>'H1_Financial_Analysis'!A1:I13</cells>. Column B is Revenue, C is COGS (Cost of Goods Sold), D is Operating Expenses. Please calculate: (1) Gross Profit = Revenue - COGS. (2) Net Profit = Gross Profit - OpEx. (3) Gross Profit Margin % = (Gross Profit / Revenue) × 100. (4) Month-over-Month Revenue Growth % = ((Current Revenue - Previous Revenue) / Previous Revenue) × 100. For January, show \"N/A\" since there's no previous month. (5) Cumulative Revenue = running total of revenue from Jan to current month. Write Gross Profit here: <target>'H1_Financial_Analysis'!E2:E13</target>. Write Net Profit here: <target>'H1_Financial_Analysis'!F2:F13</target>. Write GP Margin here: <target>'H1_Financial_Analysis'!G2:G13</target>. Write MoM Growth here: <target>'H1_Financial_Analysis'!H2:H13</target>. Write Cumulative Revenue here: <target>'H1_Financial_Analysis'!I2:I13</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'H1_Financial_Analysis'!A1:I13",
+            "cell_values": [
+                [
+                    "Month",
+                    "Revenue",
+                    "COGS",
+                    "OpEx",
+                    "Gross Profit",
+                    "Net Profit",
+                    "GP Margin %",
+                    "MoM Growth %",
+                    "Cumulative Rev"
+                ],
+                [
+                    "Jan",
+                    125000,
+                    45000,
+                    35000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Feb",
+                    132000,
+                    47500,
+                    36000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Mar",
+                    145000,
+                    52000,
+                    38000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Apr",
+                    138000,
+                    49500,
+                    37000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "May",
+                    155000,
+                    55500,
+                    40000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Jun",
+                    168000,
+                    60000,
+                    42000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Jul",
+                    172000,
+                    61500,
+                    43000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Aug",
+                    165000,
+                    59000,
+                    41000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Sep",
+                    178000,
+                    63500,
+                    44000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Oct",
+                    185000,
+                    66000,
+                    46000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Nov",
+                    195000,
+                    70000,
+                    48000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Dec",
+                    210000,
+                    75000,
+                    52000,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+            ],
+            "sheet_name": "H1_Financial_Analysis",
+            "range": "A1:I13"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is a monthly financial data table: <cells>'H1_Financial_Analysis'!A1:I13</cells>. Column B is Revenue, C is COGS (Cost of Goods Sold), D is Operating Expenses. Please calculate: (1) Gross Profit = Revenue - COGS. (2) Net Profit = Gross Profit - OpEx. (3) Gross Profit Margin % = (Gross Profit / Revenue) × 100. (4) Month-over-Month Revenue Growth % = ((Current Revenue - Previous Revenue) / Previous Revenue) × 100. For January, show \"N/A\" since there's no previous month. (5) Cumulative Revenue = running total of revenue from Jan to current month. Write Gross Profit here: <target>'H1_Financial_Analysis'!E2:E13</target>. Write Net Profit here: <target>'H1_Financial_Analysis'!F2:F13</target>. Write GP Margin here: <target>'H1_Financial_Analysis'!G2:G13</target>. Write MoM Growth here: <target>'H1_Financial_Analysis'!H2:H13</target>. Write Cumulative Revenue here: <target>'H1_Financial_Analysis'!I2:I13</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'H1_Financial_Analysis'!E2:E13",
+            "sheet_name": "H1_Financial_Analysis",
+            "range": "E2:E13"
+        },
+        {
+            "sheet_name_and_range": "'H1_Financial_Analysis'!F2:F13",
+            "sheet_name": "H1_Financial_Analysis",
+            "range": "F2:F13"
+        },
+        {
+            "sheet_name_and_range": "'H1_Financial_Analysis'!G2:G13",
+            "sheet_name": "H1_Financial_Analysis",
+            "range": "G2:G13"
+        },
+        {
+            "sheet_name_and_range": "'H1_Financial_Analysis'!H2:H13",
+            "sheet_name": "H1_Financial_Analysis",
+            "range": "H2:H13"
+        },
+        {
+            "sheet_name_and_range": "'H1_Financial_Analysis'!I2:I13",
+            "sheet_name": "H1_Financial_Analysis",
+            "range": "I2:I13"
+        }
+    ]
+}

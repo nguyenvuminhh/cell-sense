@@ -1,0 +1,174 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2, 'H2_Commission_Tiers'!$K$3:$M$6, 3, TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2, $K$2:$M$6, 3, TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$3:$M$6,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IFERROR(VLOOKUP(G2, K$2:M$6, 3, TRUE), \"\")",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2, K2:M6, 3, TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2, K2:M6, 3, TRUE)",
+      "I2:I9": "=G2*H2"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$3:$M$6,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$3:$M$6,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$3:$M$6,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$3:$M$6,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=LOOKUP(G2, $K$3:$K$6, $M$3:$M$6)",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2, $K$3:$M$6, 3, TRUE)",
+      "I2:I9": "=G2*H2"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "G2:G9": "=IF(COUNTA(C2:F2)=0,\"\",SUM(C2:F2))",
+      "H2:H9": "=IF(G2=\"\",\"\",VLOOKUP(G2,$K$3:$M$6,3,TRUE))",
+      "I2:I9": "=IF(G2=\"\",\"\",G2*H2)"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$2:$M$5,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2,$K$3:$M$6,3,TRUE)",
+      "I2:I9": "=G2*H2"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=LOOKUP(G2, $K$2:$K$6, $M$2:$M$6)",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=VLOOKUP(G2, $K$2:$M$6, 3, TRUE)",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2": "=SUM(C2:F2)",
+      "G3": "=SUM(C3:F3)",
+      "G4": "=SUM(C4:F4)",
+      "G5": "=SUM(C5:F5)",
+      "G6": "=SUM(C6:F6)",
+      "G7": "=SUM(C7:F7)",
+      "G8": "=SUM(C8:F8)",
+      "G9": "=SUM(C9:F9)",
+      "H2": "=LOOKUP(G2, $K$3:$K$6, $M$3:$M$6)",
+      "H3": "=LOOKUP(G3, $K$3:$K$6, $M$3:$M$6)",
+      "H4": "=LOOKUP(G4, $K$3:$K$6, $M$3:$M$6)",
+      "H5": "=LOOKUP(G5, $K$3:$K$6, $M$3:$M$6)",
+      "H6": "=LOOKUP(G6, $K$3:$K$6, $M$3:$M$6)",
+      "H7": "=LOOKUP(G7, $K$3:$K$6, $M$3:$M$6)",
+      "H8": "=LOOKUP(G8, $K$3:$K$6, $M$3:$M$6)",
+      "H9": "=LOOKUP(G9, $K$3:$K$6, $M$3:$M$6)",
+      "I2": "=G2*H2",
+      "I3": "=G3*H3",
+      "I4": "=G4*H4",
+      "I5": "=G5*H5",
+      "I6": "=G6*H6",
+      "I7": "=G7*H7",
+      "I8": "=G8*H8",
+      "I9": "=G9*H9"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IF(G2<=200000,0.05,IF(G2<=400000,0.08,IF(G2<=600000,0.12,0.15)))",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IF(G2<=200000, 0.05, IF(G2<=400000, 0.08, IF(G2<=600000, 0.12, 0.15)))",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IFERROR(INDEX($M$2:$M$6,MATCH(1,(G2>=$K$2:$K$6)*(G2<=$L$2:$L$6),0)),0.05)",
+      "I2:I9": "=G2*H2"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IF(G2<=K3,M2,IF(G2<=K4,M3,IF(G2<=K5,M4,M5)))",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IF(G2<=K3,M2,IF(G2<=K4,M3,IF(G2<=K5,M4,M5)))",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing a string at line 1 column 2033 [type=json_invalid, input_value='{\"message\": \"Calculated ..._name\": \"H2_Commission_', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IFS(G2<=$L$4,$M$4,G2<=$L$5,$M$5,G2<=$L$6,$M$6,G2>$L$6,$M$7)",
+      "I2:I9": "=G2*H2"
+    },
+    "second": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=INDEX($M$4:$M$7,MATCH(1,(G2>=$K$4:$K$7)*(G2<=$L$4:$L$7),0))",
+      "I2:I9": "=G2*H2"
+    },
+    "third": {
+      "G2:G9": "=SUM(C2:F2)",
+      "H2:H9": "=IFS(G2<=$L$3,$M$3,G2<=$L$4,$M$4,G2<=$L$5,$M$5,G2>$L$5,$M$6)",
+      "I2:I9": "=G2*H2"
+    }
+  }
+}

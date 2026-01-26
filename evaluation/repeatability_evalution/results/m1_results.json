@@ -1,0 +1,128 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2, $H$2:$I$5, 2, FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,H$2:I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2, $H$2:$I$5, 2, FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2, $H$2:$I$5, 2, FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2, $H$2:$I$5, 2, FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "E2:E9": "=IFERROR(VLOOKUP(B2,$H$2:$I$5,2,FALSE),0)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2, $H$2:$I$5, 2, FALSE)",
+      "F2:F9": "=C2 * E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2, $H$1:$I$5, 2, FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2, $H$2:$I$5, 2, FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "second": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    },
+    "third": {
+      "E2:E9": "=VLOOKUP(B2,$H$2:$I$5,2,FALSE)",
+      "F2:F9": "=C2*E2"
+    }
+  }
+}

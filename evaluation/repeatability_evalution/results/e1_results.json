@@ -1,0 +1,144 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(B2:E6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(B2:E6)"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2": "=SUM(B2:E2)",
+      "F3": "=SUM(B3:E3)",
+      "F4": "=SUM(B4:E4)",
+      "F5": "=SUM(B5:E5)",
+      "F6": "=SUM(B6:E6)",
+      "F7": "=SUM(B2:E6)"
+    },
+    "third": {
+      "F2": "=SUM(B2:E2)",
+      "F3": "=SUM(B3:E3)",
+      "F4": "=SUM(B4:E4)",
+      "F5": "=SUM(B5:E5)",
+      "F6": "=SUM(B6:E6)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(B2:E6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "F2": "=SUM(B2:E2)",
+      "F3": "=SUM(B3:E3)",
+      "F4": "=SUM(B4:E4)",
+      "F5": "=SUM(B5:E5)",
+      "F6": "=SUM(B6:E6)",
+      "F7": "=SUM(B2:E6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "third": {
+      "F2": "=SUM(B2:E2)",
+      "F3": "=SUM(B3:E3)",
+      "F4": "=SUM(B4:E4)",
+      "F5": "=SUM(B5:E5)",
+      "F6": "=SUM(B6:E6)",
+      "F7": "=SUM(F2:F6)"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    },
+    "second": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(B2:E6)"
+    },
+    "third": {
+      "F2:F6": "=SUM(B2:E2)",
+      "F7": "=SUM(F2:F6)"
+    }
+  }
+}

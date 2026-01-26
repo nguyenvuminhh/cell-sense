@@ -1,0 +1,126 @@
+{
+    "message": "This is an employee data table: <cells>'M1_Employee_Bonus'!A1:F9</cells>. There is also a department bonus rate lookup table: <cells>'M1_Employee_Bonus'!H1:I5</cells>. Please look up the bonus rate for each employee based on their department (column B) using the lookup table. Then calculate the bonus amount (base salary × bonus rate). Write the bonus rate here: <target>'M1_Employee_Bonus'!E2:E9</target>. Write the bonus amount here: <target>'M1_Employee_Bonus'!F2:F9</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'M1_Employee_Bonus'!A1:F9",
+            "cell_values": [
+                [
+                    "Employee",
+                    "Department",
+                    "Base Salary",
+                    "Performance",
+                    "Bonus Rate",
+                    "Bonus Amount"
+                ],
+                [
+                    "John",
+                    "Sales",
+                    55000,
+                    4,
+                    "",
+                    ""
+                ],
+                [
+                    "Sarah",
+                    "Engineering",
+                    72000,
+                    5,
+                    "",
+                    ""
+                ],
+                [
+                    "Mike",
+                    "Sales",
+                    48000,
+                    3,
+                    "",
+                    ""
+                ],
+                [
+                    "Rachel",
+                    "Marketing",
+                    52000,
+                    4,
+                    "",
+                    ""
+                ],
+                [
+                    "Tom",
+                    "Engineering",
+                    78000,
+                    5,
+                    "",
+                    ""
+                ],
+                [
+                    "Lisa",
+                    "HR",
+                    45000,
+                    3,
+                    "",
+                    ""
+                ],
+                [
+                    "James",
+                    "Sales",
+                    62000,
+                    5,
+                    "",
+                    ""
+                ],
+                [
+                    "Emma",
+                    "Marketing",
+                    51000,
+                    2,
+                    "",
+                    ""
+                ]
+            ],
+            "sheet_name": "M1_Employee_Bonus",
+            "range": "A1:F9"
+        },
+        {
+            "sheet_name_and_range": "'M1_Employee_Bonus'!H1:I5",
+            "cell_values": [
+                [
+                    "Department",
+                    "Bonus %"
+                ],
+                [
+                    "Sales",
+                    0.1
+                ],
+                [
+                    "Engineering",
+                    0.15
+                ],
+                [
+                    "Marketing",
+                    0.08
+                ],
+                [
+                    "HR",
+                    0.05
+                ]
+            ],
+            "sheet_name": "M1_Employee_Bonus",
+            "range": "H1:I5"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is an employee data table: <cells>'M1_Employee_Bonus'!A1:F9</cells>. There is also a department bonus rate lookup table: <cells>'M1_Employee_Bonus'!H1:I5</cells>. Please look up the bonus rate for each employee based on their department (column B) using the lookup table. Then calculate the bonus amount (base salary × bonus rate). Write the bonus rate here: <target>'M1_Employee_Bonus'!E2:E9</target>. Write the bonus amount here: <target>'M1_Employee_Bonus'!F2:F9</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'M1_Employee_Bonus'!E2:E9",
+            "sheet_name": "M1_Employee_Bonus",
+            "range": "E2:E9"
+        },
+        {
+            "sheet_name_and_range": "'M1_Employee_Bonus'!F2:F9",
+            "sheet_name": "M1_Employee_Bonus",
+            "range": "F2:F9"
+        }
+    ]
+}

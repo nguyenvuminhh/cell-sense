@@ -1,0 +1,141 @@
+{
+    "message": "This is a candidate evaluation table: <cells>'H3_Weighted_Scoring'!A1:H9</cells>. Columns B-E contain scores in different categories with weights shown in the header (Technical 40%, Experience 25%, Culture Fit 20%, Communication 15%). Decision criteria is shown in <cells>'H3_Weighted_Scoring'!J1:J4</cells>. Please calculate: (1) Weighted Score = (Technical×0.4) + (Experience×0.25) + (Culture Fit×0.2) + (Communication×0.15). (2) Rank = rank of each candidate based on weighted score (1 = highest). (3) Decision based on weighted score: >= 85 show \"Hire\", 75-84 show \"Second Interview\", < 75 show \"Reject\". Write Weighted Score here: <target>'H3_Weighted_Scoring'!F2:F9</target>. Write Rank here: <target>'H3_Weighted_Scoring'!G2:G9</target>. Write Decision here: <target>'H3_Weighted_Scoring'!H2:H9</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'H3_Weighted_Scoring'!A1:H9",
+            "cell_values": [
+                [
+                    "Candidate",
+                    "Technical (40%)",
+                    "Experience (25%)",
+                    "Culture Fit (20%)",
+                    "Communication (15%)",
+                    "Weighted Score",
+                    "Rank",
+                    "Decision"
+                ],
+                [
+                    "John Smith",
+                    85,
+                    70,
+                    90,
+                    88,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Sarah Jones",
+                    92,
+                    85,
+                    75,
+                    80,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Mike Wilson",
+                    78,
+                    90,
+                    82,
+                    75,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Rachel Davis",
+                    88,
+                    65,
+                    95,
+                    92,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Tom Brown",
+                    95,
+                    80,
+                    70,
+                    68,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Lisa Chen",
+                    72,
+                    95,
+                    88,
+                    85,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "James Lee",
+                    80,
+                    75,
+                    85,
+                    90,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Emma Park",
+                    90,
+                    88,
+                    78,
+                    82,
+                    "",
+                    "",
+                    ""
+                ]
+            ],
+            "sheet_name": "H3_Weighted_Scoring",
+            "range": "A1:H9"
+        },
+        {
+            "sheet_name_and_range": "'H3_Weighted_Scoring'!J1:J4",
+            "cell_values": [
+                [
+                    "Decision Criteria:"
+                ],
+                [
+                    "Score >= 85: Hire"
+                ],
+                [
+                    "Score 75-84: Second Interview"
+                ],
+                [
+                    "Score < 75: Reject"
+                ]
+            ],
+            "sheet_name": "H3_Weighted_Scoring",
+            "range": "J1:J4"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is a candidate evaluation table: <cells>'H3_Weighted_Scoring'!A1:H9</cells>. Columns B-E contain scores in different categories with weights shown in the header (Technical 40%, Experience 25%, Culture Fit 20%, Communication 15%). Decision criteria is shown in <cells>'H3_Weighted_Scoring'!J1:J4</cells>. Please calculate: (1) Weighted Score = (Technical×0.4) + (Experience×0.25) + (Culture Fit×0.2) + (Communication×0.15). (2) Rank = rank of each candidate based on weighted score (1 = highest). (3) Decision based on weighted score: >= 85 show \"Hire\", 75-84 show \"Second Interview\", < 75 show \"Reject\". Write Weighted Score here: <target>'H3_Weighted_Scoring'!F2:F9</target>. Write Rank here: <target>'H3_Weighted_Scoring'!G2:G9</target>. Write Decision here: <target>'H3_Weighted_Scoring'!H2:H9</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'H3_Weighted_Scoring'!F2:F9",
+            "sheet_name": "H3_Weighted_Scoring",
+            "range": "F2:F9"
+        },
+        {
+            "sheet_name_and_range": "'H3_Weighted_Scoring'!G2:G9",
+            "sheet_name": "H3_Weighted_Scoring",
+            "range": "G2:G9"
+        },
+        {
+            "sheet_name_and_range": "'H3_Weighted_Scoring'!H2:H9",
+            "sheet_name": "H3_Weighted_Scoring",
+            "range": "H2:H9"
+        }
+    ]
+}
