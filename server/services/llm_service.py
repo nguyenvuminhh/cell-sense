@@ -44,7 +44,7 @@ async def generate_response(
     chat_id: int | None = None,
 ) -> UserPromptAndModelResponse:
     if message_request.llm_provider == LLMProviders.GOOGLE:
-        return await _generate_response_for_gemini(
+        result = await _generate_response_for_gemini(
             session=session,
             message_request=message_request,
             template_name=template_name,
@@ -53,7 +53,7 @@ async def generate_response(
             chat_id=chat_id,
         )
     elif message_request.llm_provider == LLMProviders.OPENAI:
-        return await _generate_response_for_chatgpt(
+        result = await _generate_response_for_chatgpt(
             session=session,
             message_request=message_request,
             template_name=template_name,
@@ -62,7 +62,7 @@ async def generate_response(
             chat_id=chat_id,
         )
     elif message_request.llm_provider == LLMProviders.ANTHROPIC:
-        return await _generate_response_for_anthropic(
+        result = await _generate_response_for_anthropic(
             session=session,
             message_request=message_request,
             template_name=template_name,
@@ -74,6 +74,8 @@ async def generate_response(
         raise InternalServerError(
             f"Unsupported LLM provider: {message_request.llm_provider}"
         )
+
+    return result
 
 
 # ------ Generate response functions for each LLM provider ------ #

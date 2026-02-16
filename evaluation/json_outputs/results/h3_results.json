@@ -1,0 +1,170 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "F2:F9": "=B2*0.4+C2*0.25+D2*0.2+E2*0.15",
+      "G2:G9": "=RANK.EQ(F2,F$2:F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK.EQ(F2,F$2:F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK(F2,F$2:F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "F2:F9": "=SUMPRODUCT(B2:E2, {0.4, 0.25, 0.2, 0.15})",
+      "G2:G9": "=RANK.EQ(F2, $F$2:$F$9, 0)",
+      "H2:H9": "=IF(F2>=85, \"Hire\", IF(F2>=75, \"Second Interview\", \"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=SUMPRODUCT(B2:E2, {0.4, 0.25, 0.2, 0.15})",
+      "G2:G9": "=RANK.EQ(F2, $F$2:$F$9)",
+      "H2:H9": "=IF(F2>=85, \"Hire\", IF(F2>=75, \"Second Interview\", \"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=SUM(B2*0.4, C2*0.25, D2*0.2, E2*0.15)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "F2:F9": "=B2*0.4+C2*0.25+D2*0.2+E2*0.15",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=B2*0.4+C2*0.25+D2*0.2+E2*0.15",
+      "G2:G9": "=RANK(F2,$F$2:$F$9)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15",
+      "G2:G9": "=RANK(F2, $F$2:$F$9, 0)",
+      "H2:H9": "=IF(F2>=85, \"Hire\", IF(F2>=75, \"Second Interview\", \"Reject\"))"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "F2:F9": "=B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15",
+      "G2:G9": "=RANK.EQ(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15",
+      "G2:G9": "=RANK(F2, $F$2:$F$9, 0)",
+      "H2:H9": "=IF(F2>=85, \"Hire\", IF(F2>=75, \"Second Interview\", \"Reject\"))"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "F2:F9": "=ROUND(B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15, 2)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK.EQ(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=ROUND(B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15, 1)",
+      "G2:G9": "=RANK.EQ(F2, $F$2:$F$9, 0)",
+      "H2:H9": "=IF(F2>=85, \"Hire\", IF(F2>=75, \"Second Interview\", \"Reject\"))"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "F2:F9": "=0.4*B2+0.25*C2+0.2*D2+0.15*E2",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=B2*0.4 + C2*0.25 + D2*0.2 + E2*0.15",
+      "G2:G9": "=RANK.EQ(F2, $F$2:$F$9, 0)",
+      "H2:H9": "=IF(F2>=85, \"Hire\", IF(F2>=75, \"Second Interview\", \"Reject\"))"
+    },
+    "third": {
+      "F2": "=0.4*B2+0.25*C2+0.2*D2+0.15*E2",
+      "F3": "=0.4*B3+0.25*C3+0.2*D3+0.15*E3",
+      "F4": "=0.4*B4+0.25*C4+0.2*D4+0.15*E4",
+      "F5": "=0.4*B5+0.25*C5+0.2*D5+0.15*E5",
+      "F6": "=0.4*B6+0.25*C6+0.2*D6+0.15*E6",
+      "F7": "=0.4*B7+0.25*C7+0.2*D7+0.15*E7",
+      "F8": "=0.4*B8+0.25*C8+0.2*D8+0.15*E8",
+      "F9": "=0.4*B9+0.25*C9+0.2*D9+0.15*E9",
+      "G2": "=RANK.EQ(F2,$F$2:$F$9,0)",
+      "G3": "=RANK.EQ(F3,$F$2:$F$9,0)",
+      "G4": "=RANK.EQ(F4,$F$2:$F$9,0)",
+      "G5": "=RANK.EQ(F5,$F$2:$F$9,0)",
+      "G6": "=RANK.EQ(F6,$F$2:$F$9,0)",
+      "G7": "=RANK.EQ(F7,$F$2:$F$9,0)",
+      "G8": "=RANK.EQ(F8,$F$2:$F$9,0)",
+      "G9": "=RANK.EQ(F9,$F$2:$F$9,0)",
+      "H2": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))",
+      "H3": "=IF(F3>=85,\"Hire\",IF(F3>=75,\"Second Interview\",\"Reject\"))",
+      "H4": "=IF(F4>=85,\"Hire\",IF(F4>=75,\"Second Interview\",\"Reject\"))",
+      "H5": "=IF(F5>=85,\"Hire\",IF(F5>=75,\"Second Interview\",\"Reject\"))",
+      "H6": "=IF(F6>=85,\"Hire\",IF(F6>=75,\"Second Interview\",\"Reject\"))",
+      "H7": "=IF(F7>=85,\"Hire\",IF(F7>=75,\"Second Interview\",\"Reject\"))",
+      "H8": "=IF(F8>=85,\"Hire\",IF(F8>=75,\"Second Interview\",\"Reject\"))",
+      "H9": "=IF(F9>=85,\"Hire\",IF(F9>=75,\"Second Interview\",\"Reject\"))"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "F2:F9": "=B2*0.4+C2*0.25+D2*0.2+E2*0.15",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing a string at line 1 column 2029 [type=json_invalid, input_value='{\"message\": \"Calculated ...d_Scoring\", \"range\": \"H', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    },
+    "second": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing an object at line 1 column 1982 [type=json_invalid, input_value='{\"message\": \"Calculated ...view\\\\\",\\\\\"Reject\\\\\"))\"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    },
+    "third": {
+      "error": "LLM request failed: 1 validation error for MessageResponse\n  Invalid JSON: EOF while parsing a string at line 1 column 2025 [type=json_invalid, input_value='{\"message\": \"Calculated ...d_Scoring\", \"range\": \"H', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "second": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    },
+    "third": {
+      "F2:F9": "=(B2*0.4)+(C2*0.25)+(D2*0.2)+(E2*0.15)",
+      "G2:G9": "=RANK(F2,$F$2:$F$9,0)",
+      "H2:H9": "=IF(F2>=85,\"Hire\",IF(F2>=75,\"Second Interview\",\"Reject\"))"
+    }
+  }
+}

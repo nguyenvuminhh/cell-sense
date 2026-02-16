@@ -1,0 +1,155 @@
+{
+  "gemini-2.5-flash": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    }
+  },
+  "gemini-2.5-flash-lite": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    }
+  },
+  "gemini-2.5-pro": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    }
+  },
+  "gpt-5": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=IF(F2>0, E2/F2, \"\")",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=IFERROR(E2/F2, \"\")",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    }
+  },
+  "gpt-5-mini": {
+    "first": {
+      "F2:F7": "=ARRAYFORMULA(IF(B2:B7=\"\",\"\",C2:C7 - B2:B7))",
+      "G2:G7": "=ARRAYFORMULA(IF(B2:B7=\"\",\"\",IF((C2:C7 - B2:B7)=0,\"\",E2:E7 / (C2:C7 - B2:B7))))",
+      "H2:H7": "=ARRAYFORMULA(IF(B2:B7=\"\",\"\",IF(E2:E7 < D2:D7,\"Under Budget\",IF(E2:E7 > D2:D7,\"Over Budget\",\"On Budget\"))))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=IF(F2>0, E2/F2, \"\")",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=IF(F2>0, E2/F2, \"\")",
+      "H2:H7": "=IF(E2<D2, \"Under Budget\", IF(E2>D2, \"Over Budget\", \"On Budget\"))"
+    }
+  },
+  "gpt-5-nano": {
+    "first": {
+      "F2:F7": "=C2:C7-B2:B7",
+      "G2:G7": "=IF((C2:C7-B2:B7)>0, E2:E7/(C2:C7-B2:B7), \"\")",
+      "H2:H7": "=IF(E2:E7<D2:D7, \\\"Under Budget\\\", IF(E2:E7>D2:D7, \\\"Over Budget\\\", \\\"On Budget\\\"))"
+    },
+    "second": {
+      "F2:F7": "=C2:C7 - B2:B7",
+      "G2:G7": "=IF(F2:F7>0, E2:E7 / F2:F7, \"\")",
+      "H2:H7": "=IF(E2:E7 < D2:D7, \"Under Budget\", IF(E2:E7 > D2:D7, \"Over Budget\", \"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    }
+  },
+  "claude-haiku-4-5": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    }
+  },
+  "claude-sonnet-4-5": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    }
+  },
+  "claude-opus-4-5": {
+    "first": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "second": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    },
+    "third": {
+      "F2:F7": "=C2-B2",
+      "G2:G7": "=E2/F2",
+      "H2:H7": "=IF(E2<D2,\"Under Budget\",IF(E2>D2,\"Over Budget\",\"On Budget\"))"
+    }
+  }
+}

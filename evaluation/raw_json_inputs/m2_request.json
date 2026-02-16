@@ -1,0 +1,131 @@
+{
+    "message": "This is an order transactions table: <cells>'M2_Order_Analysis'!A1:G11</cells>. Please calculate the following summary statistics: (1) Total revenue from orders where Customer is \"Acme Corp\" AND Product is \"Product A\" (revenue = quantity × unit price). (2) Count of orders where Region is \"North\" AND Status is \"Completed\". (3) Average quantity for all \"Product B\" orders. Write results here: <target>'M2_Order_Analysis'!K2</target> for revenue, <target>'M2_Order_Analysis'!K3</target> for count, <target>'M2_Order_Analysis'!K4</target> for average.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'M2_Order_Analysis'!A1:G11",
+            "cell_values": [
+                [
+                    "Order ID",
+                    "Customer",
+                    "Product",
+                    "Region",
+                    "Quantity",
+                    "Unit Price",
+                    "Status"
+                ],
+                [
+                    "ORD001",
+                    "Acme Corp",
+                    "Product A",
+                    "North",
+                    100,
+                    25,
+                    "Completed"
+                ],
+                [
+                    "ORD002",
+                    "Beta Inc",
+                    "Product B",
+                    "South",
+                    50,
+                    45,
+                    "Completed"
+                ],
+                [
+                    "ORD003",
+                    "Acme Corp",
+                    "Product A",
+                    "North",
+                    75,
+                    25,
+                    "Pending"
+                ],
+                [
+                    "ORD004",
+                    "Gamma LLC",
+                    "Product A",
+                    "East",
+                    200,
+                    25,
+                    "Completed"
+                ],
+                [
+                    "ORD005",
+                    "Delta Co",
+                    "Product B",
+                    "West",
+                    30,
+                    45,
+                    "Cancelled"
+                ],
+                [
+                    "ORD006",
+                    "Beta Inc",
+                    "Product A",
+                    "South",
+                    150,
+                    25,
+                    "Completed"
+                ],
+                [
+                    "ORD007",
+                    "Acme Corp",
+                    "Product C",
+                    "North",
+                    80,
+                    55,
+                    "Completed"
+                ],
+                [
+                    "ORD008",
+                    "Gamma LLC",
+                    "Product B",
+                    "East",
+                    90,
+                    45,
+                    "Completed"
+                ],
+                [
+                    "ORD009",
+                    "Delta Co",
+                    "Product A",
+                    "West",
+                    120,
+                    25,
+                    "Pending"
+                ],
+                [
+                    "ORD010",
+                    "Acme Corp",
+                    "Product B",
+                    "North",
+                    40,
+                    45,
+                    "Completed"
+                ]
+            ],
+            "sheet_name": "M2_Order_Analysis",
+            "range": "A1:G11"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is an order transactions table: <cells>'M2_Order_Analysis'!A1:G11</cells>. Please calculate the following summary statistics: (1) Total revenue from orders where Customer is \"Acme Corp\" AND Product is \"Product A\" (revenue = quantity × unit price). (2) Count of orders where Region is \"North\" AND Status is \"Completed\". (3) Average quantity for all \"Product B\" orders. Write results here: <target>'M2_Order_Analysis'!K2</target> for revenue, <target>'M2_Order_Analysis'!K3</target> for count, <target>'M2_Order_Analysis'!K4</target> for average.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'M2_Order_Analysis'!K2",
+            "sheet_name": "M2_Order_Analysis",
+            "range": "K2"
+        },
+        {
+            "sheet_name_and_range": "'M2_Order_Analysis'!K3",
+            "sheet_name": "M2_Order_Analysis",
+            "range": "K3"
+        },
+        {
+            "sheet_name_and_range": "'M2_Order_Analysis'!K4",
+            "sheet_name": "M2_Order_Analysis",
+            "range": "K4"
+        }
+    ]
+}

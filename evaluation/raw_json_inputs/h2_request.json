@@ -1,0 +1,163 @@
+{
+    "message": "This is a sales performance table: <cells>'H2_Commission_Tiers'!A1:I9</cells>. Columns C-F contain quarterly sales. There is also a commission tier table: <cells>'H2_Commission_Tiers'!K2:M6</cells> showing rate bands based on annual sales. Please calculate: (1) Annual Sales = sum of all 4 quarters. (2) Commission Rate by looking up the annual sales in the tier table (use the rate where annual sales falls between min and max). (3) Commission Earned = Annual Sales × Commission Rate. Write Annual Sales here: <target>'H2_Commission_Tiers'!G2:G9</target>. Write Commission Rate here: <target>'H2_Commission_Tiers'!H2:H9</target>. Write Commission Earned here: <target>'H2_Commission_Tiers'!I2:I9</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'H2_Commission_Tiers'!A1:I9",
+            "cell_values": [
+                [
+                    "Salesperson",
+                    "Region",
+                    "Q1 Sales",
+                    "Q2 Sales",
+                    "Q3 Sales",
+                    "Q4 Sales",
+                    "Annual Sales",
+                    "Commission Rate",
+                    "Commission Earned"
+                ],
+                [
+                    "Alice",
+                    "North",
+                    85000,
+                    92000,
+                    78000,
+                    95000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Bob",
+                    "South",
+                    45000,
+                    52000,
+                    48000,
+                    55000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Carol",
+                    "East",
+                    120000,
+                    135000,
+                    128000,
+                    142000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "David",
+                    "West",
+                    62000,
+                    58000,
+                    65000,
+                    70000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Eva",
+                    "North",
+                    98000,
+                    105000,
+                    110000,
+                    115000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Frank",
+                    "South",
+                    38000,
+                    42000,
+                    40000,
+                    45000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Grace",
+                    "East",
+                    75000,
+                    82000,
+                    79000,
+                    88000,
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "Henry",
+                    "West",
+                    150000,
+                    165000,
+                    158000,
+                    172000,
+                    "",
+                    "",
+                    ""
+                ]
+            ],
+            "sheet_name": "H2_Commission_Tiers",
+            "range": "A1:I9"
+        },
+        {
+            "sheet_name_and_range": "'H2_Commission_Tiers'!K2:M6",
+            "cell_values": [
+                [
+                    "Min Sales",
+                    "Max Sales",
+                    "Rate"
+                ],
+                [
+                    0,
+                    200000,
+                    0.05
+                ],
+                [
+                    200001,
+                    400000,
+                    0.08
+                ],
+                [
+                    400001,
+                    600000,
+                    0.12
+                ],
+                [
+                    600001,
+                    999999999,
+                    0.15
+                ]
+            ],
+            "sheet_name": "H2_Commission_Tiers",
+            "range": "K2:M6"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is a sales performance table: <cells>'H2_Commission_Tiers'!A1:I9</cells>. Columns C-F contain quarterly sales. There is also a commission tier table: <cells>'H2_Commission_Tiers'!K2:M6</cells> showing rate bands based on annual sales. Please calculate: (1) Annual Sales = sum of all 4 quarters. (2) Commission Rate by looking up the annual sales in the tier table (use the rate where annual sales falls between min and max). (3) Commission Earned = Annual Sales × Commission Rate. Write Annual Sales here: <target>'H2_Commission_Tiers'!G2:G9</target>. Write Commission Rate here: <target>'H2_Commission_Tiers'!H2:H9</target>. Write Commission Earned here: <target>'H2_Commission_Tiers'!I2:I9</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'H2_Commission_Tiers'!G2:G9",
+            "sheet_name": "H2_Commission_Tiers",
+            "range": "G2:G9"
+        },
+        {
+            "sheet_name_and_range": "'H2_Commission_Tiers'!H2:H9",
+            "sheet_name": "H2_Commission_Tiers",
+            "range": "H2:H9"
+        },
+        {
+            "sheet_name_and_range": "'H2_Commission_Tiers'!I2:I9",
+            "sheet_name": "H2_Commission_Tiers",
+            "range": "I2:I9"
+        }
+    ]
+}

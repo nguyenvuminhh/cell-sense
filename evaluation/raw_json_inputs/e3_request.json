@@ -1,0 +1,96 @@
+{
+    "message": "This is an inventory management table: <cells>'E3_Inventory_Check'!A1:F8</cells>. Column B has current stock, column C has reorder level, column D has unit cost. Please calculate the stock value (current stock × unit cost) for each item. Then check if reorder is needed: if current stock <= reorder level, show \"Yes\", otherwise \"No\". Write stock value here: <target>'E3_Inventory_Check'!E2:E8</target>. Write reorder status here: <target>'E3_Inventory_Check'!F2:F8</target>. Also calculate total stock value here: <target>'E3_Inventory_Check'!E9</target>.",
+    "selected_ranges": [
+        {
+            "sheet_name_and_range": "'E3_Inventory_Check'!A1:F8",
+            "cell_values": [
+                [
+                    "Item",
+                    "Current Stock",
+                    "Reorder Level",
+                    "Unit Cost",
+                    "Stock Value",
+                    "Need Reorder?"
+                ],
+                [
+                    "Widget A",
+                    150,
+                    50,
+                    12.5,
+                    "",
+                    ""
+                ],
+                [
+                    "Widget B",
+                    25,
+                    30,
+                    18.75,
+                    "",
+                    ""
+                ],
+                [
+                    "Gadget C",
+                    0,
+                    20,
+                    45,
+                    "",
+                    ""
+                ],
+                [
+                    "Gadget D",
+                    80,
+                    75,
+                    22.5,
+                    "",
+                    ""
+                ],
+                [
+                    "Part E",
+                    200,
+                    100,
+                    8.25,
+                    "",
+                    ""
+                ],
+                [
+                    "Part F",
+                    10,
+                    40,
+                    35,
+                    "",
+                    ""
+                ],
+                [
+                    "Component G",
+                    95,
+                    100,
+                    15.5,
+                    "",
+                    ""
+                ]
+            ],
+            "sheet_name": "E3_Inventory_Check",
+            "range": "A1:F8"
+        }
+    ],
+    "llm_provider": "google",
+    "llm_model": "gemini-2.5-flash-lite",
+    "decoded_message": "This is an inventory management table: <cells>'E3_Inventory_Check'!A1:F8</cells>. Column B has current stock, column C has reorder level, column D has unit cost. Please calculate the stock value (current stock × unit cost) for each item. Then check if reorder is needed: if current stock <= reorder level, show \"Yes\", otherwise \"No\". Write stock value here: <target>'E3_Inventory_Check'!E2:E8</target>. Write reorder status here: <target>'E3_Inventory_Check'!F2:F8</target>. Also calculate total stock value here: <target>'E3_Inventory_Check'!E9</target>.",
+    "target_ranges": [
+        {
+            "sheet_name_and_range": "'E3_Inventory_Check'!E2:E8",
+            "sheet_name": "E3_Inventory_Check",
+            "range": "E2:E8"
+        },
+        {
+            "sheet_name_and_range": "'E3_Inventory_Check'!F2:F8",
+            "sheet_name": "E3_Inventory_Check",
+            "range": "F2:F8"
+        },
+        {
+            "sheet_name_and_range": "'E3_Inventory_Check'!E9",
+            "sheet_name": "E3_Inventory_Check",
+            "range": "E9"
+        }
+    ]
+}

@@ -33,14 +33,11 @@ The project will be consist of the following components:
 10. Do prompt engineering to improve the quality of generated formulas.
 11. Polishing the frontend, with better error display, loading effects, etc. Allow user to reject changes suggested by the AI assistant.
 12. Evaluating the performance of different LLM models (e.g., Gemini 2.5 Pro, Gemini 2.5 Flash, OpenAI GPT-4, Anthropic Claude 3) on various tasks and datasets.
-13. Chat assistant fetch information about multiple sheets to answer users questions that require data from multiple sheets (read-only).
-14. Editing multiple sheets in one request.
-More tasks/features may be added as the project progresses.
 
 ### Logistics Tasks
 1. Implement test cases for backend API endpoints.
 2. Set up continuous integration and deployment (CI/CD) pipelines for automated testing and deployment.
-3. Prepare project documentation, including user guides and technical documentation.
+3. Prepare project documentation, including user guides, and technical documentation.
 4. Regular meetings with advisor for progress updates and feedback.
 5. Final project report and presentation preparation.
 
