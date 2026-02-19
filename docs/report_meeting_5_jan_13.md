@@ -3,7 +3,7 @@
 ## Progress Since Last Meeting
 - Deploy to production environment on Google Cloud Platform (GCP).
 - Implement CI/CD pipelines for automated testing and deployment.
-- Integrate additional LLM providers: OpenAI ChatGPT, Anthropic Claude.
+- Integrate additional LLM providers: OpenAI GPT, Anthropic Claude.
 - Polishing the frontend: Allow user to revert changes suggested by the AI assistant and add loading effects.
 - Build a API key usage tracker and a telegram bot to monitor API key usage.
 
@@ -37,14 +37,14 @@
 3. Update the deployment to use the new version
 
 ## Integration of Additional LLM Providers
-- Integrated OpenAI ChatGPT and Anthropic Claude as additional LLM providers.
+- Integrated OpenAI GPT and Anthropic Claude as additional LLM providers.
 - Users can now select which LLM provider to use for inference in the UI.
 - Users can also input their own API keys for these LLM providers in the My Profile section of the UI.
 - The system will use the user's provided API key if available; otherwise, it will use the system's API key. Note that system's API key usage is only available for Gemini models.
 
 - Supported models:
     - Google Gemini: "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"
-    - OpenAI ChatGPT: "gpt-5", "gpt-5-pro", "gpt-5-mini", "gpt-5-nano"
+    - OpenAI GPT: "gpt-5", "gpt-5-pro", "gpt-5-mini", "gpt-5-nano"
     - Anthropic Claude: "claude-haiku-4-5",
     "claude-sonnet-4-5", "claude-opus-4-5"
 

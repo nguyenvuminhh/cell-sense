@@ -33,8 +33,8 @@ class MessageRequest(BaseModel):
     # sheet: List[List[Any]]
     selected_ranges: List[SelectedRange]
 
-    llm_provider: LLMProviders = LLMProviders.GOOGLE
-    llm_model: LLMModels = LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE
+    llm_provider: LLMProviders
+    llm_model: LLMModels
 
     @computed_field
     @property
