@@ -222,7 +222,7 @@ async def test_get_chat_messages(db_session):
         chat_id=chat.id,
         content="Second message",
         is_from_user=False,
-        model_name=LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE,
+        model_name=LLMModels.GOOGLE_GEMINI_2_5_FLASH,
         full_model_response='{"message": "response"}',
     )
 
@@ -356,7 +356,7 @@ async def test_handle_message_with_user_api_key(db_session):
             )
         ],
         llm_provider=LLMProviders.GOOGLE,
-        llm_model=LLMModels.GOOGLE_GEMINI_2_5_FLASH_LITE,
+        llm_model=LLMModels.GOOGLE_GEMINI_2_5_FLASH,
     )
 
     # Mock the LLM service and API key
@@ -431,6 +431,8 @@ async def test_handle_message_uses_free_quota(db_session):
                 cell_values=[["A", "B"], ["C", "D"]],
             )
         ],
+        llm_provider=LLMProviders.GOOGLE,
+        llm_model=LLMModels.GOOGLE_GEMINI_2_5_FLASH,
     )
 
     # Mock both LLM service and system API key
@@ -504,6 +506,8 @@ async def test_handle_message_no_quota_left(db_session):
                 cell_values=[["A", "B"], ["C", "D"]],
             )
         ],
+        llm_provider=LLMProviders.GOOGLE,
+        llm_model=LLMModels.GOOGLE_GEMINI_2_5_FLASH,
     )
 
     with (
@@ -556,6 +560,8 @@ async def test_handle_message_updates_chat_title(db_session):
                 cell_values=[["A", "B"], ["C", "D"]],
             )
         ],
+        llm_provider=LLMProviders.GOOGLE,
+        llm_model=LLMModels.GOOGLE_GEMINI_2_5_FLASH,
     )
 
     # Mock both LLM service calls (for message and title)
@@ -612,6 +618,8 @@ async def test_handle_message_chat_not_found(db_session):
                 cell_values=[["A", "B"], ["C", "D"]],
             )
         ],
+        llm_provider=LLMProviders.GOOGLE,
+        llm_model=LLMModels.GOOGLE_GEMINI_2_5_FLASH,
     )
 
     with pytest.raises(NotFoundError):

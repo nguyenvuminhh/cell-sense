@@ -12,7 +12,7 @@ The frontend runs as a Google Apps Script extension, built with HTML and JavaScr
 
 ## 🤖 AI Model Support
 - Google Gemini: "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"
-- OpenAI ChatGPT: "gpt-5", "gpt-5-pro", "gpt-5-mini", "gpt-5-nano"
+- OpenAI GPT: "gpt-5", "gpt-5-pro", "gpt-5-mini", "gpt-5-nano"
 - Anthropic Claude: "claude-haiku-4-5", "claude-sonnet-4-5", "claude-opus-4-5"
 
 The backend is designed to be model-agnostic, allowing flexible switching or expansion across AI providers.

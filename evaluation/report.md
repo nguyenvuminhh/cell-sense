@@ -411,3 +411,9 @@
 - Gemini 2.5 Pro: Extra double negatives (e.g., `--(condition)`).
 - GPT-5 Nano: Extra escape characters (e.g., `\\\"` instead of `\"`).
 - Claude Sonnet 4.5: JSON parsing errors.
+
+# Models Should Be Removed
+- After the evaluation, these models are incapable and should be removed:
+  - Gemini 2.5 Flash Lite
+  - GPT-5 Nano
+  - Claude Sonnet 4.5

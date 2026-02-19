@@ -35,7 +35,7 @@ For analogy, if we were to compare these models to a coding task, where each mod
 
 ## What failed:
 - The implementation of the inline chat service failed due to underestimating the complexity.
-- Inline chat requires a custom function, and a custom function does not have access to the Google Sheets API in the App Script environment. Therefore, the inline chat service cannot access the spreadsheet data to provide context-aware responses.
+- Inline chat requires a custom function, and a custom function does not have access to the Google Sheets API in the Apps Script environment. Therefore, the inline chat service cannot access the spreadsheet data to provide context-aware responses.
 - Furthermore, the range passed into the inline chat is not exactly the range, but it is actually the data. See example below:
 ```
 /**
