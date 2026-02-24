@@ -1,4 +1,4 @@
-from fastapi import Depends, Query
+from fastapi import Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from server.crud import users_crud
@@ -10,9 +10,11 @@ logger = get_logger()
 
 
 async def extract_user_from_request(
-    user_email: str = Query(...),
+    request: Request,
     session: AsyncSession = Depends(get_database_async_session),
 ) -> User:
+    user_email = request.state.google_user.get("email")  # type: ignore
+
     user = await users_crud.get_user_with_email(session, email=user_email)
     if user:
         logger.info(f"User found: {user.email}")

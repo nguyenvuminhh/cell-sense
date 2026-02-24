@@ -1,12 +1,12 @@
-# Cell-Sense
+# CellSense
 
 AI assistant for Google Sheets — like GitHub Copilot, but for spreadsheets.
 
-Cell-Sense brings AI-powered assistance directly into Google Sheets, helping users write formulas, understand data, and automate spreadsheet workflows using natural language.
+Cell-ense brings AI-powered assistance directly into Google Sheets, helping users write formulas, understand data, and automate spreadsheet workflows using natural language.
 
 ## 🚀 Overview
 
-Cell-Sense is an AI productivity tool designed to enhance Google Sheets with intelligent suggestions and contextual assistance. Inspired by GitHub Copilot, it allows users to interact with their spreadsheets conversationally, turning natural-language prompts into formulas, explanations, and automation logic.
+CellSense is an AI productivity tool designed to enhance Google Sheets with intelligent suggestions and contextual assistance. Inspired by GitHub Copilot, it allows users to interact with their spreadsheets conversationally, turning natural-language prompts into formulas, explanations, and automation logic.
 
 The frontend runs as a Google Apps Script extension, built with HTML and JavaScript, and is embedded directly into Google Sheets. The backend is hosted on Google Cloud Platform (GCP) and acts as a secure API layer that connects the Sheets UI to multiple large language models.
 
