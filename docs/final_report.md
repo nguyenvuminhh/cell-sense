@@ -7,7 +7,7 @@
 - **Advisor:** Leinonen Juho
 - **Course:** ELEC-C0302 - Final Project in Digital Systems and Design
 - **Duration:** Period II - Period III, 2025-2026
-
+- **Running instance:** https://docs.google.com/spreadsheets/d/13uBCmtwEhp2BgL4xUM2KJt6KaRRpQXA5cPOytErKHkw/edit?gid=0#gid=0
 ---
 
 ## 1. Introduction
@@ -225,3 +225,8 @@ All requests older than 1 minute are rejected. This prevents replay/delay attack
 Tests use `pytest` with `pytest-asyncio` for async support. A separate PostgreSQL 16 database runs via `docker-compose.test.yml`. Each test function gets a fresh database session that is rolled back after execution, ensuring test isolation. Tests are run with `make run_test`, which spins up the test database, runs migrations, executes all tests, and cleans up.
 
 Code quality is enforced through pre-commit hooks: Ruff (linting), Pyright (type checking), Black (formatting), isort (import sorting), Bandit (security analysis), and detect-secrets (credential detection).
+
+---
+## 7 Model Evaluation
+
+See evaluation/report.md.
