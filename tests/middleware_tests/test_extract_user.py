@@ -2,13 +2,24 @@
 Tests for extract_user_from_request middleware.
 """
 
+from types import SimpleNamespace
+from typing import cast
+
 import pytest
+from fastapi import Request
 
 from server.crud import users_crud
 from server.middleware.extract_user_from_request import (
     extract_user_from_request,
 )
 from server.models.user_models import UserRequest
+
+
+def _make_request(email: str) -> Request:
+    """Create a fake request with google_user state."""
+    request = SimpleNamespace()
+    request.state = SimpleNamespace(google_user={"email": email})
+    return cast(Request, request)
 
 
 # Helper function to create a unique user for each test
@@ -35,7 +46,7 @@ async def test_extract_user_existing_user(db_session):
 
     # Extract the user
     extracted_user = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     assert extracted_user is not None
@@ -55,7 +66,7 @@ async def test_extract_user_creates_new_user(db_session):
 
     # Extract user (should create new one)
     extracted_user = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     assert extracted_user is not None
@@ -70,7 +81,7 @@ async def test_extract_user_creates_user_without_api_key(db_session):
     email = "no_api_key_user@example.com"
 
     extracted_user = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     assert extracted_user is not None
@@ -85,13 +96,13 @@ async def test_extract_user_multiple_calls_same_email(db_session):
 
     # First call - creates user
     user1 = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
     await db_session.commit()
 
     # Second call - retrieves existing user
     user2 = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     assert user1.id == user2.id
@@ -105,12 +116,12 @@ async def test_extract_user_different_emails(db_session):
     email2 = "user2_diff@example.com"
 
     user1 = await extract_user_from_request(
-        user_email=email1, session=db_session
+        _make_request(email1), session=db_session
     )
     await db_session.commit()
 
     user2 = await extract_user_from_request(
-        user_email=email2, session=db_session
+        _make_request(email2), session=db_session
     )
     await db_session.commit()
 
@@ -133,7 +144,7 @@ async def test_extract_user_preserves_existing_api_key(db_session):
 
     # Extract user
     extracted_user = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     assert extracted_user.gemini_api_key == api_key
@@ -146,12 +157,12 @@ async def test_extract_user_email_case_sensitive(db_session):
     email_upper = "TESTUSER@example.com"
 
     user1 = await extract_user_from_request(
-        user_email=email_lower, session=db_session
+        _make_request(email_lower), session=db_session
     )
     await db_session.commit()
 
     user2 = await extract_user_from_request(
-        user_email=email_upper, session=db_session
+        _make_request(email_upper), session=db_session
     )
     await db_session.commit()
 
@@ -167,7 +178,7 @@ async def test_extract_user_with_special_characters_in_email(db_session):
     email = "user+test@example.com"
 
     extracted_user = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     assert extracted_user is not None
@@ -180,7 +191,7 @@ async def test_extract_user_returns_complete_user_model(db_session):
     email = "complete_user@example.com"
 
     extracted_user = await extract_user_from_request(
-        user_email=email, session=db_session
+        _make_request(email), session=db_session
     )
 
     # Check all expected fields exist

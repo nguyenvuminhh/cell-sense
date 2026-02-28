@@ -204,12 +204,19 @@ When a user sends a request, the API key is resolved depending on the chosen mod
 
 ---
 
-## 5. Authentication
-Authentication is handled using Google OAuth 2.0 identity tokens (OIDC).
+## 5. Security
 
-- **Frontend:** On every API call, the frontend obtains a Google-signed identity token via `ScriptApp.getIdentityToken()` and sends it as a `Bearer` token in the `Authorization` header.
+### 5.1 Authentication with OpenID Connect (OIDC)
 
-- **Backend:** The `verify_google_identity_token` middleware extracts the Bearer token and verifies it using Google's `id_token.verify_oauth2_token()`, which checks the token's signature, expiry, and audience (must match the configured OAuth client ID). If valid, the user's email and identity info are stored in `request.state.google_user` for downstream handlers. Requests with missing or invalid tokens are rejected with a 401 response.
+Authentication is handled using OpenID Connect (OIDC), a protocol built on top of OAuth 2.0.
+
+The frontend (Apps Script) attaches an OIDC token of the effective user (the logged-in user) to all requests. OIDC is a JSON Web Token (JWT) signed by Google. The backend then decodes the JWT token and confirms the signature — at this point, we can confirm that the token has not been tampered with, and it is indeed issued by Google.
+
+The body of the decoded token contains the effective user's email, audience (target client ID), and other fields. The effective user's email is used to create an account (if one does not already exist). The audience must match the OAuth client ID of the Apps Script — at this point, we can confirm that the token was issued for the Google Apps Script of our app, and we can authenticate the logged-in user.
+
+### 5.2 Rejecting Old Requests
+
+All requests older than 1 minute are rejected. This prevents replay/delay attacks, where an attacker could intercept a valid request and resend it at a later time.
 
 ---
 
