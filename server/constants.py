@@ -22,16 +22,16 @@ class LLMProviders(StrEnum):
 
 class LLMModels(StrEnum):
     GOOGLE_GEMINI_2_5_FLASH = "gemini-2.5-flash"
-    # GOOGLE_GEMINI_2_5_FLASH_LITE = "gemini-2.5-flash-lite"
+    GOOGLE_GEMINI_2_5_FLASH_LITE = "gemini-2.5-flash-lite"
     GOOGLE_GEMINI_2_5_PRO = "gemini-2.5-pro"
 
     OPENAI_GPT_5 = "gpt-5"
-    # OPENAI_GPT_5_PRO = "gpt-5-pro"
+    OPENAI_GPT_5_PRO = "gpt-5-pro"
     OPENAI_GPT_5_MINI = "gpt-5-mini"
-    # OPENAI_GPT_5_NANO = "gpt-5-nano"
+    OPENAI_GPT_5_NANO = "gpt-5-nano"
 
     ANTHROPIC_CLAUDE_HAIKU_4_5 = "claude-haiku-4-5"
-    # ANTHROPIC_CLAUDE_SONNET_4_5 = "claude-sonnet-4-5"
+    ANTHROPIC_CLAUDE_SONNET_4_5 = "claude-sonnet-4-5"
     ANTHROPIC_CLAUDE_OPUS_4_5 = "claude-opus-4-5"
 
 

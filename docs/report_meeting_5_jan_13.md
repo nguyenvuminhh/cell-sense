@@ -11,7 +11,7 @@
 - The backend FastAPI server is now deployed to a production environment on Google Cloud Platform (GCP).
 - Resources:
     - **Google Cloud Run** is used for serverless deployment of the FastAPI backend. It is also used for CI/CD deployment's jobs (migrating database schema).
-    - **Google Container Registry (GCR)** is used for storing Docker images.
+    - **Google Container Registry** is used for storing Docker images.
     - **Google Cloud SQL for PostgreSQL** is used to store user data and chat history.
     - **Google Apps Script** is used for the frontend, deployed as a Google Sheets add-on. The production Apps Script is binded to a Google Sheets document, allowing everyone to use the app via that document.
 
@@ -26,7 +26,7 @@
 ### Pipeline Steps for Backend
 1. Run pre-commit checks (linting, formatting, type checking, etc.)
 2. Run tests
-3. Build and push Docker image to Google Container Registry (GCR)
+3. Build and push Docker image to Google Container Registry
 4. Restart Cloud Run service so that it pulls the latest Docker image
 5. Migrate traffic to the new revision
 6. Migrate database schema using Alembic via a Google Cloud Run job

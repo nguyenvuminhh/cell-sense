@@ -1,7 +1,7 @@
-# Cell-Sense: AI-Powered Google Sheets Assistant
+# CellSense: AI-Powered Google Sheets Assistant
 
 ## Basic Information
-- **Project Title:** AI-Powered Google Sheets Assistant (Cell-Sense)
+- **Project Title:** AI-Powered Google Sheets Assistant (CellSense)
 - **Student Name:** Vu Minh Nguyen
 - **Student ID:** 101676647
 - **Advisor:** Leinonen Juho
@@ -12,20 +12,20 @@
 
 ## 1. Introduction
 
-### 1.1 Problem Statement
+### 1.1 Problem
 
-Google Sheets is a popular tool for statistics, data analysis, management, etc. It is widely used in many fields by people from different background. Therefore, there are many people finds it is difficult to remember complex syntaxs for formulas. To address this issue, this project created an AI-powered assistant  that integrates with Google Sheets to help users perform these tasks more efficiently by leveraging large language models (LLMs) to aid users in generating formulas.
+Google Sheets is a popular tool for statistics, data analysis, management, etc. It is widely used in many fields by people from different backgrounds. Therefore, many people find it difficult to remember complex syntax for formulas. To address this issue, this project developed an AI-powered assistant that integrates with Google Sheets to help users perform these tasks more efficiently by leveraging large language models (LLMs) to assist in generating formulas.
 
 ### 1.2 Objectives
 
-The goal of this project is a functional Google Sheets add-on that allows users to interact with an AI assistant. The final product should be capable of:
-- Generating formulas according to user's instructions.
+The goal of this project is a functional Google Sheets add-on that allows users to interact with an AI assistant. The final version should be capable of:
+- Generating formulas according to the user's instructions.
 - Allowing users to attach cell contents as context for the AI assistant.
 - Attaching previous messages in the chat as context for multi-turn conversations.
 - Editing multiple cell ranges in one request.
-- Supporting multiple LLM providers (Google Gemini, OpenAI GPT, Anthropic Claude).
+- Supporting multiple LLM providers (Google, OpenAI , Anthropic).
 - Allowing users to input their own API keys for their preferred LLM provider.
-- Having user tiers: free users with limited daily quota using the system API key, and users with their own API keys and no usage limits.
+- Having user tiers: free users with a limited daily quota using the system API key, and users with their own API keys and no usage limits.
 - Having user management, chat management, and authentication.
 - Evaluating the performance of different LLM models on formula generation tasks. Incapable models are removed.
 
@@ -35,7 +35,7 @@ The goal of this project is a functional Google Sheets add-on that allows users 
 
 ### 2.1 High-Level Overview
 
-After receiving user's request, the frontend (a Google Apps Script written in HTML + JS) forward to the backend (a FastAPI server hosted on GCP Cloud Run). The backend then query the database (a PostgreSQL database hosted on GCP CloudSQL) and sending requests to LLM providers (Google Gemini, OpenAI GPT, Anthropic Claude).
+After receiving the user's request, the frontend (a Google Apps Script written in HTML and TypeScript) forwards it to the backend (a FastAPI server hosted on GCP Cloud Run). The backend then queries the database (a PostgreSQL database hosted on GCP Cloud SQL) and call to LLM providers' API (Google, OpenAI , Anthropic). After receiving and processing responses from the database and the LLM providers, the backends send the formulas with the explanation to the frontend. The frontend then displays the explanation and apply the formulas to the target cells.
 
 ### 2.2 Frontend — Google Apps Script
 
@@ -49,12 +49,11 @@ google_apps_script/
 │   ├── Code.js              # Bundled entry point
 │   └── html/                # HTML templates (copied from src/html/)
 ├── src/                     # Source code
-│   ├── Code.ts              # Entry point
 │   ├── config.ts            # Configurations
 │   ├── types.ts             # Auto-generated types from backend OpenAPI schema
-│   ├── index.ts             # Barrel exports
 │   ├── html/                # HTML templates for sidebar UI
-│   └── services/            # Service layer
+│   ├── services/            # Service layer
+│   └── other .ts files
 ├── scripts/                 # Build helper scripts
 └── package.json             # Dependencies (esbuild, eslint, typescript)
 ```
@@ -68,10 +67,6 @@ The TypeScript source is bundled and deployed to Google Apps Script using `esbui
 4. **Copy assets** — HTML templates and `appsscript.json` manifest are copied to `dist/`.
 5. **Deploy** — `clasp push` uploads the `dist/` directory to the Apps Script project.
 
-```bash
-make clasp_push_dev    # Build and deploy to dev
-make clasp_push_prod   # Build and deploy to prod
-```
 
 #### 2.2.3 Tabs
 
@@ -128,6 +123,13 @@ server/
 
 ![alt text](./assets/9_schema.png)
 
+### 2.5 Cloud Infrastructure
+- Google Cloud Platform (GCP) is used for hosting the backend and database.
+- Resources:
+    - **Google Cloud Run** is used for serverless deployment of the FastAPI backend. It is also used for CI/CD deployment's jobs (migrating database schema).
+    - **Google Container Registry** is used for storing Docker images. Cloud Run pulls from the Container Registry to deploy the backend.
+    - **Google Cloud SQL for PostgreSQL** is used to store user data and chat history.
+    - **Google Apps Script** is used for the frontend, deployed as a Google Sheets add-on. The production Apps Script is binded to a Google Sheets document, allowing everyone to use the app via that document.
 ---
 
 ## 3. LLM Integration
@@ -140,13 +142,11 @@ server/
 | OpenAI GPT | gpt-5, gpt-5-mini |
 | Anthropic Claude | claude-opus-4-5, claude-haiku-4-5 |
 
-### 3.2 Prompt Engineering
+### 3.2 Structured Input
 
-Prompts are managed using Jinja2 templates stored in `server/prompts/`. Jinja2 is a templating engine that allows embedding placeholders (e.g., `{{ variable }}`) and control structures (e.g., `{% for %}` loops) inside text files. At runtime, these placeholders are replaced with actual data from a json input, producing the final prompt string sent to the LLM. This separates prompt logic from application code, making it easy to iterate on prompt design without modifying the service layer.
+Input prompts are managed using Jinja2 templates stored in `server/prompts/`. Jinja2 is a templating engine that allows embedding placeholders (e.g., `{{ variable }}`) and control structures (e.g., `{% for %}` loops) inside text files. At runtime, these placeholders are replaced with actual data from a json input, producing the final prompt string sent to the LLM. This separates prompt logic from application code, making it easy to iterate on prompt design without modifying the service layer.
 
-#### Structured Input
-
-The main prompt template (`llm_request_prompt.md`) defines the LLM's role as a "spreadsheet reasoning agent". It receive a JSON as input:
+The main prompt template (`llm_request_prompt.md`) defines the LLM's role as a "spreadsheet reasoning agent". It receives a JSON as input:
 
 ```json
 {
@@ -168,7 +168,7 @@ The main prompt template (`llm_request_prompt.md`) defines the LLM's role as a "
 }
 ```
 
-#### Structured Output
+### 3.3 Structured Output
 
 All models are instructed to return a JSON object with a fixed schema:
 
@@ -186,14 +186,14 @@ All models are instructed to return a JSON object with a fixed schema:
 ```
 
 
-### 3.3 Conversation Context
+### 3.4 Conversation Context
 
 To support multi-turn conversations, the backend attaches previous messages from the current chat session to each LLM request. When a user sends a new message, the service fetches up to 30 most recent messages from the database for that chat. These messages are prepended to the new user prompt before sending to the LLM. This allows the model to reference earlier instructions, follow up on previous formulas, and maintain coherent dialogue across multiple exchanges within a chat session.
 
 
-## 4. User Management
+## 4. User and API Key Management
 
-Users are automatically created on their first API request. The `extract_user_from_request` middleware looks up the user by the email from the authenticated Google identity token. If no user exists, one is created automatically — there is no separate registration step.
+Users are automatically created on their first API request. The `extract_user_from_request` middleware looks up the user by the email from the query. If no user exists, one is created automatically — there is no separate registration step.
 
 Each user can optionally store personal API keys for Gemini, ChatGPT, and Claude. These keys are stored in the database and can be set, changed, or deleted from the Profile tab.
 
@@ -204,12 +204,19 @@ When a user sends a request, the API key is resolved depending on the chosen mod
 
 ---
 
-## 5. Authentication
-Authentication is handled using Google OAuth 2.0 identity tokens (OIDC).
+## 5. Security
 
-- **Frontend:** On every API call, the frontend obtains a Google-signed identity token via `ScriptApp.getIdentityToken()` and sends it as a `Bearer` token in the `Authorization` header.
+### 5.1 Authentication with OpenID Connect (OIDC)
 
-- **Backend:** The `verify_google_identity_token` middleware extracts the Bearer token and verifies it using Google's `id_token.verify_oauth2_token()`, which checks the token's signature, expiry, and audience (must match the configured OAuth client ID). If valid, the user's email and identity info are stored in `request.state.google_user` for downstream handlers. Requests with missing or invalid tokens are rejected with a 401 response.
+Authentication is handled using OpenID Connect (OIDC), a protocol built on top of OAuth 2.0.
+
+The frontend (Apps Script) attaches an OIDC token of the effective user (the logged-in user) to all requests. OIDC is a JSON Web Token (JWT) signed by Google. The backend then decodes the JWT token and confirms the signature — at this point, we can confirm that the token has not been tampered with, and it is indeed issued by Google.
+
+The body of the decoded token contains the effective user's email, audience (target client ID), and other fields. The effective user's email is used to create an account (if one does not already exist). The audience must match the OAuth client ID of the Apps Script — at this point, we can confirm that the token was issued for the Google Apps Script of our app, and we can authenticate the logged-in user.
+
+### 5.2 Rejecting Old Requests
+
+All requests older than 1 minute are rejected. This prevents replay/delay attacks, where an attacker could intercept a valid request and resend it at a later time.
 
 ---
 
