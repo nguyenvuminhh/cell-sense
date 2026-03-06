@@ -4,35 +4,6 @@ AI-powered Google Sheets add-on that turns plain English into spreadsheet formul
 
 > The hosted instance is currently down due to GCP billing. Screenshots below show what it looks like.
 
-## Screenshots
-
-<table>
-  <tr>
-    <td><img src="docs/assets/4_error_and_info_messages.jpeg" alt="Chat UI" width="400"></td>
-    <td><img src="docs/assets/5_loading_effect.png" alt="Loading state" width="300"></td>
-  </tr>
-  <tr>
-    <td><em>Chat interface with error handling</em></td>
-    <td><em>Loading while the model thinks</em></td>
-  </tr>
-  <tr>
-    <td><img src="docs/assets/4_model_selection.png" alt="Model picker" width="300"></td>
-    <td><img src="docs/assets/4_user_profile.png" alt="Profile page" width="300"></td>
-  </tr>
-  <tr>
-    <td><em>Model picker</em></td>
-    <td><em>Profile and API key management</em></td>
-  </tr>
-  <tr>
-    <td><img src="docs/assets/5_allow_revert.png" alt="Revert feature" width="300"></td>
-    <td><img src="docs/assets/5_google_warning.png" alt="Google auth warning" width="300"></td>
-  </tr>
-  <tr>
-    <td><em>One-click revert</em></td>
-    <td><em>Google authorization prompt</em></td>
-  </tr>
-</table>
-
 ## Features
 
 - Generate formulas from natural language
@@ -116,3 +87,30 @@ Three models got dropped for bad results: Gemini 2.5 Flash Lite, GPT-5 Nano, and
 ## Database Schema
 
 ![Schema](docs/assets/9_schema.png)
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="docs/assets/4_error_and_info_messages.jpeg" alt="Chat UI" width="400"></td>
+    <td><img src="docs/assets/5_loading_effect.png" alt="Loading state" width="300"></td>
+  </tr>
+  <tr>
+    <td><em>Chat interface with error handling</em></td>
+    <td><em>Loading while the model thinks</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/assets/4_model_selection.png" alt="Model picker" width="300"></td>
+    <td><img src="docs/assets/4_user_profile.png" alt="Profile page" width="300"></td>
+  </tr>
+  <tr>
+    <td><em>Model picker</em></td>
+    <td><em>Profile and API key management</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/assets/5_allow_revert.png" alt="Revert feature" width="300"></td>
+  </tr>
+  <tr>
+    <td><em>One-click revert</em></td>
+  </tr>
+</table>
