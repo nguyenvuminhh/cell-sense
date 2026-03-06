@@ -6,38 +6,7 @@ An AI-powered Google Sheets add-on that generates spreadsheet formulas from plai
 
 ---
 
-## Screenshots
-
-<table>
-  <tr>
-    <td><img src="docs/assets/4_error_and_info_messages.jpeg" alt="Chat UI with error handling and info messages" width="400"></td>
-    <td><img src="docs/assets/5_loading_effect.png" alt="Loading state while waiting for LLM response" width="300"></td>
-  </tr>
-  <tr>
-    <td><em>Chat interface — multi-turn conversation, error banners, info messages</em></td>
-    <td><em>Loading indicator while the model thinks</em></td>
-  </tr>
-  <tr>
-    <td><img src="docs/assets/4_model_selection.png" alt="Model selection dropdown" width="300"></td>
-    <td><img src="docs/assets/4_user_profile.png" alt="User profile page" width="300"></td>
-  </tr>
-  <tr>
-    <td><em>Pick your model — Gemini, GPT, or Claude</em></td>
-    <td><em>Profile page — API key management and free quota</em></td>
-  </tr>
-  <tr>
-    <td><img src="docs/assets/5_allow_revert.png" alt="Revert edit feature" width="300"></td>
-    <td><img src="docs/assets/5_google_warning.png" alt="Google authorization warning" width="300"></td>
-  </tr>
-  <tr>
-    <td><em>One-click revert after formulas are applied</em></td>
-    <td><em>Google's authorization prompt for the add-on</em></td>
-  </tr>
-</table>
-
----
-
-## What It Does
+## 1. What It Does
 
 - **Formula generation from natural language** — describe what you want, get working formulas applied to your sheet.
 - **Multi-turn chat** — follow up on previous instructions within the same conversation. Up to 30 recent messages are sent as context.
@@ -50,7 +19,7 @@ An AI-powered Google Sheets add-on that generates spreadsheet formulas from plai
 
 ---
 
-## Supported Models
+## 2. Supported Models
 
 | Provider | Models |
 |----------|--------|
@@ -58,11 +27,11 @@ An AI-powered Google Sheets add-on that generates spreadsheet formulas from plai
 | OpenAI GPT | `gpt-5`, `gpt-5-mini` |
 | Anthropic Claude | `claude-opus-4-5`, `claude-haiku-4-5` |
 
-Three models were removed after evaluation (see [LLM Evaluation](#llm-evaluation)): Gemini 2.5 Flash Lite, GPT-5 Nano, and Claude Sonnet 4.5.
+Three models were removed after evaluation (see [Section 8 — LLM Evaluation](#8-llm-evaluation)): Gemini 2.5 Flash Lite, GPT-5 Nano, and Claude Sonnet 4.5.
 
 ---
 
-## Architecture Overview
+## 3. Architecture Overview
 
 The system has four main components:
 
@@ -85,7 +54,7 @@ A Telegram bot tracks deployment and error events:
 
 ---
 
-## Project Structure
+## 4. Project Structure
 
 ```
 server/
@@ -125,7 +94,7 @@ tests/                     # pytest test suite
 
 ---
 
-## How It Works
+## 5. How It Works
 
 The prompt pipeline:
 
@@ -170,7 +139,7 @@ And the full LLM response:
 
 ---
 
-## Database Schema
+## 6. Database Schema
 
 Five tables managed by Alembic migrations:
 
@@ -186,7 +155,7 @@ Five tables managed by Alembic migrations:
 
 ---
 
-## Security
+## 7. Security
 
 - **OIDC authentication** — the Apps Script frontend attaches a Google-signed OIDC token (JWT) to every request. The backend verifies the signature and checks that the audience matches the Apps Script's OAuth client ID. This confirms both the token's authenticity and that it was issued for CellSense specifically.
 - **Timestamp verification** — requests older than 1 minute are rejected to prevent replay attacks.
@@ -194,7 +163,7 @@ Five tables managed by Alembic migrations:
 
 ---
 
-## LLM Evaluation
+## 8. LLM Evaluation
 
 Nine models across three providers were evaluated on Google Sheets formula generation tasks. The test set had 9 sheets across 3 difficulty levels (Easy, Medium, Hard), with each model attempting each task 3 times.
 
@@ -257,7 +226,7 @@ After evaluation, three models were dropped for producing incorrect or inconsist
 
 ---
 
-## Tech Stack
+## 9. Tech Stack
 
 - **Backend:** Python 3.11, FastAPI, SQLAlchemy, Alembic, Jinja2
 - **Frontend:** TypeScript, Google Apps Script, esbuild
@@ -270,44 +239,7 @@ After evaluation, three models were dropped for producing incorrect or inconsist
 
 ---
 
-## Local Development
-
-### Prerequisites
-
-- Python 3.11+
-- [Poetry](https://python-poetry.org/)
-- Docker & Docker Compose
-- A `.env` file with database credentials and API keys
-
-### Setup
-
-```bash
-# Install dependencies
-make install
-
-# Start the local PostgreSQL database
-make spin_up_db
-
-# Run database migrations
-make upgrade_db
-
-# Start the dev server (hot reload)
-make run_dev
-```
-
-The server runs at `http://localhost:8000`. For external access during development, use `make ngrok_expose`.
-
-### Other useful commands
-
-```bash
-make reset_db           # Drop, recreate, and migrate the database
-make new_migration MSG="description"   # Generate a new Alembic migration
-make precommit          # Run all pre-commit hooks
-```
-
----
-
-## Testing
+## 10. Testing
 
 Tests run against a separate PostgreSQL instance. Each test gets a fresh database session that rolls back after execution.
 
@@ -321,3 +253,34 @@ make test               # Run all tests
 make test DIR=service_tests  # Run a specific test directory
 make post_test          # Tear down test DB
 ```
+
+---
+
+## 11. Screenshots
+
+<table>
+  <tr>
+    <td><img src="docs/assets/4_error_and_info_messages.jpeg" alt="Chat UI with error handling and info messages" width="400"></td>
+    <td><img src="docs/assets/5_loading_effect.png" alt="Loading state while waiting for LLM response" width="300"></td>
+  </tr>
+  <tr>
+    <td><em>Chat interface — multi-turn conversation, error banners, info messages</em></td>
+    <td><em>Loading indicator while the model thinks</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/assets/4_model_selection.png" alt="Model selection dropdown" width="300"></td>
+    <td><img src="docs/assets/4_user_profile.png" alt="User profile page" width="300"></td>
+  </tr>
+  <tr>
+    <td><em>Pick your model — Gemini, GPT, or Claude</em></td>
+    <td><em>Profile page — API key management and free quota</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/assets/5_allow_revert.png" alt="Revert edit feature" width="300"></td>
+    <td><img src="docs/assets/5_google_warning.png" alt="Google authorization warning" width="300"></td>
+  </tr>
+  <tr>
+    <td><em>One-click revert after formulas are applied</em></td>
+    <td><em>Google's authorization prompt for the add-on</em></td>
+  </tr>
+</table>
