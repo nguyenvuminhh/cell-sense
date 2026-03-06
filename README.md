@@ -48,10 +48,6 @@ And a more complex sheet with student grades, exercise scores, and weighted calc
 
 ![Example sheet with student grades](docs/assets/3_example_sheet.png)
 
-A Telegram bot tracks deployment and error events:
-
-![Telegram bot tracker](docs/assets/5_telegram_bot_tracker.png)
-
 ---
 
 ## 4. Project Structure
